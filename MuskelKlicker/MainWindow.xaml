@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="100" Margin="482,10,0,0" VerticalAlignment="Top" Width="300" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick"/>
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="332"/>
+
     </Grid>
 </Window>
