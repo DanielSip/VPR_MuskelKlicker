@@ -55,13 +55,13 @@ namespace MuskelKlicker
             {
                 ShopItem item = (ShopItem)lstbx_shopitems.SelectedItem;
                 
-                if (item.EnoughPoints(points, item))
-                {
+                
                     clicker.ActiveClick += item.UpgradeA;
                     clicker.PassiveClick += item.UpgradeP;
                     item.EnoughPoints(points, item);
                     MessageBox.Show(points.ToString());
-                }
+                    lbl_Points.Content = points.ToString();
+               
 
 
             }

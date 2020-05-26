@@ -30,17 +30,17 @@ namespace MuskelKlicker
         }
 
 
-        public bool EnoughPoints(int points, ShopItem currentItem)
+        public int EnoughPoints(int points, ShopItem currentItem)
         {
-            if (currentItem.cost < points)
+            if (currentItem.cost <= points)
             {
                 points -= currentItem.Cost;
                 currentItem.Cost *= 2;
-                return true;
+                return points;
             }
             else
             {
-                return false;
+                return points;
             }
         }
 
