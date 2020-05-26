@@ -54,22 +54,27 @@ namespace MuskelKlicker
             if (lstbx_shopitems.SelectedItem != null)
             {
                 ShopItem item = (ShopItem)lstbx_shopitems.SelectedItem;
-                
-                
+
+                if (item.Cost <= points)
+                {                        
+                    points -= item.Cost;
+                    item.Cost *= 2;
                     clicker.ActiveClick += item.UpgradeA;
                     clicker.PassiveClick += item.UpgradeP;
-                    item.EnoughPoints(points, item);
                     MessageBox.Show(points.ToString());
                     lbl_Points.Content = points.ToString();
-               
-
-
+                }
+                else
+                {
+                    MessageBox.Show("Nicht genügend Geld");
+                }
+                lstbx_shopitems.Items.Refresh();
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            points++;
+            points += clicker.ActiveClick;
             lbl_Points.Content = points.ToString();
         }
     }

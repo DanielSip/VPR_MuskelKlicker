@@ -25,23 +25,9 @@ namespace MuskelKlicker
             Cost = cost;
             Name = name;
             Description = description;
-            UpgradeA = upgradeA;
             UpgradeP = upgradeP;
-        }
-
-
-        public int EnoughPoints(int points, ShopItem currentItem)
-        {
-            if (currentItem.cost <= points)
-            {
-                points -= currentItem.Cost;
-                currentItem.Cost *= 2;
-                return points;
-            }
-            else
-            {
-                return points;
-            }
+            UpgradeA = upgradeA;
+            
         }
 
         public override string ToString()
