@@ -11,7 +11,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="100" Margin="482,10,0,0" VerticalAlignment="Top" Width="300" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick"/>
-        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="332"/>
+        <Button x:Name="bt_KlickbarerBereich" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="332" Click="bt_KlickbarerBereich_Click"/>
 
     </Grid>
 </Window>

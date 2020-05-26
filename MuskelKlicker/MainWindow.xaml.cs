@@ -27,6 +27,7 @@ namespace MuskelKlicker
 
         Clicker clicker = new Clicker(0, 1);
         int points = 100;
+        int multiplikator = 1;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -64,6 +65,11 @@ namespace MuskelKlicker
 
 
             }
+        }
+
+        private void bt_KlickbarerBereich_Click(object sender, RoutedEventArgs e)
+        {
+            points += clicker.ActiveClick;
         }
     }
 }
