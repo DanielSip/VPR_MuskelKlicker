@@ -24,6 +24,7 @@ namespace MuskelKlicker
         {
             InitializeComponent();
         }
+
         Clicker clicker = new Clicker(0, 1);
         int points = 100;
 
