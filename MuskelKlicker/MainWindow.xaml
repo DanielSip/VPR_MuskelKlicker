@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuskelKlicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="190" Margin="482,10,0,0" VerticalAlignment="Top" Width="300" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick"/>
-        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click"/>
-        <Label Content="Points:" HorizontalAlignment="Left" Margin="293,10,0,0" VerticalAlignment="Top" Width="104" FontWeight="Bold"/>
-        <Label x:Name="lbl_CounterPoints" Content="" HorizontalAlignment="Left" Margin="402,10,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="100" Margin="482,10,0,0" VerticalAlignment="Top" Width="300" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick"/>
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="332"/>
 
     </Grid>
 </Window>
