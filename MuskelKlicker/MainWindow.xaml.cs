@@ -20,16 +20,16 @@ namespace MuskelKlicker
     /// </summary>
     public partial class MainWindow : Window
     {
+        Clicker clicker = new Clicker(0, 1);
+        int points = 100;
         public MainWindow()
         {
             InitializeComponent();
         }
-        Clicker clicker = new Clicker(0, 1);
-        int points = 100;
+        
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
             //Items | Clicker
             List<ShopItem> ListItems = new List<ShopItem>();
 
@@ -47,6 +47,9 @@ namespace MuskelKlicker
                 lstbx_shopitems.Items.Add(items);
             }
 
+
+            //lbl_CounterPoints.Content = points.ToString();
+            
         }
         private void lstbx_shopitems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -58,11 +61,17 @@ namespace MuskelKlicker
                 {
                     clicker.ActiveClick += item.UpgradeA;
                     clicker.PassiveClick += item.UpgradeP;
+                    
                     MessageBox.Show(points.ToString());
                 }
 
 
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            points++;
         }
     }
 }
