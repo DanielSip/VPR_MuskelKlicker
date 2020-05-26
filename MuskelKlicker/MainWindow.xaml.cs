@@ -59,7 +59,7 @@ namespace MuskelKlicker
             #endregion
 
 
-
+            //Timer
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 this.dateText.Content = DateTime.Now.ToString("ss");
@@ -74,6 +74,7 @@ namespace MuskelKlicker
             {
                 ShopItem item = (ShopItem)lstbx_shopitems.SelectedItem;
 
+                //Check, ob points vorhanden sind
                 if (item.Cost <= points)
                 {                        
                     points -= item.Cost;
@@ -93,6 +94,7 @@ namespace MuskelKlicker
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Button Aktive Click
             points += clicker.ActiveClick;
             lbl_Points.Content = points.ToString();
         }
