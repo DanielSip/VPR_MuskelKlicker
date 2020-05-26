@@ -47,23 +47,30 @@ namespace MuskelKlicker
             {
                 lstbx_shopitems.Items.Add(items);
             }
-
+            lbl_Points.Content = points.ToString();
         }
         private void lstbx_shopitems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lstbx_shopitems.SelectedItem != null)
             {
                 ShopItem item = (ShopItem)lstbx_shopitems.SelectedItem;
-                MessageBox.Show(item.EnoughPoints(points, item).ToString());
+                
                 if (item.EnoughPoints(points, item))
                 {
                     clicker.ActiveClick += item.UpgradeA;
                     clicker.PassiveClick += item.UpgradeP;
+                    item.EnoughPoints(points, item);
                     MessageBox.Show(points.ToString());
                 }
 
 
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            points++;
+            lbl_Points.Content = points.ToString();
         }
     }
 }
