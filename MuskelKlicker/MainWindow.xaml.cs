@@ -58,15 +58,18 @@ namespace MuskelKlicker
             lbl_Points.Content = points.ToString();
             #endregion
 
+            #region Timer (1 Sec)
+            //ToDo: -Klicks per sec
+            //      -Reset von klicks per sec
 
             //Timer
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                this.dateText.Content = DateTime.Now.ToString("ss");
+                //this.dateText.Content = DateTime.Now.ToString("ss");
                 points += clicker.PassiveClick;
                 lbl_Points.Content = points.ToString();
             }, this.Dispatcher);
-
+            #endregion
         }
         private void lstbx_shopitems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -74,7 +77,7 @@ namespace MuskelKlicker
             {
                 ShopItem item = (ShopItem)lstbx_shopitems.SelectedItem;
 
-                //Check, ob points vorhanden sind
+                //Check, ob points vorhanden sind | Kosten erhöhen und A/P klick verbessern
                 if (item.Cost <= points)
                 {                        
                     points -= item.Cost;

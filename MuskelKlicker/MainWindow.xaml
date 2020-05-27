@@ -14,7 +14,6 @@
         <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click"/>
         <Label Content="Points:" HorizontalAlignment="Left" Margin="293,10,0,0" VerticalAlignment="Top" Width="80"/>
         <Label x:Name="lbl_Points" Content="" HorizontalAlignment="Left" Margin="378,10,0,0" VerticalAlignment="Top" Width="99"/>
-        <Label x:Name="dateText" Content="Points:" HorizontalAlignment="Left" Margin="293,41,0,0" VerticalAlignment="Top" Width="80"/>
 
     </Grid>
 </Window>
