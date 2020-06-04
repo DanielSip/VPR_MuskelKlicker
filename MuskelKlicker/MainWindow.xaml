@@ -11,9 +11,15 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="181" Margin="482,10,0,0" VerticalAlignment="Top" Width="300" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick"/>
-        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click"/>
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click">
+            <Image Source="MainClickPic.png" Height="396"></Image>
+        </Button>
         <Label Content="Points:" HorizontalAlignment="Left" Margin="293,10,0,0" VerticalAlignment="Top" Width="80"/>
         <Label x:Name="lbl_Points" Content="" HorizontalAlignment="Left" Margin="378,10,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label x:Name="lab_ActiveClick" Content="Active Click" HorizontalAlignment="Left" Margin="293,383,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="lab_PassiveClick" Content="Passive Click" HorizontalAlignment="Left" Margin="397,383,0,0" VerticalAlignment="Top" Width="80"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="293,298,0,0" VerticalAlignment="Top" Width="80" Source="ActiveClickPic.png"/>
+        <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="397,298,0,0" VerticalAlignment="Top" Width="80" Source="PassiveClickPic.png" Stretch="Fill"/>
 
     </Grid>
 </Window>
