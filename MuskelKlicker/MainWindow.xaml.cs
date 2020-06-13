@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Timers;
 
 namespace MuskelKlicker
 {
@@ -29,8 +30,18 @@ namespace MuskelKlicker
         Clicker clicker = new Clicker(0, 1);
         int points = 100;
 
+        int clicksPerSecond = 0;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //ToDo: -Klicks per sec             Done: Andrew John / Dennis
+            //      -Reset von klicks per sec   Done: Andrew John / Dennis
+            //      -Klickbonus                 Done: Andrew John
+            //      -Grafiken einfügen          Done: Andrew John
+            //      -Shopitems aus der DB       
+            //      -Fortschritt speichern
+            //      -
+
             #region Shop und Item Update
             //Items | Clicker
             List<ShopItem> ListItems = new List<ShopItem>();
@@ -59,15 +70,16 @@ namespace MuskelKlicker
             #endregion
 
             #region Timer (1 Sec)
-            //ToDo: -Klicks per sec
-            //      -Reset von klicks per sec
 
-            //Timer
+            //Timer für jede Sekunde
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 //this.dateText.Content = DateTime.Now.ToString("ss");
                 points += clicker.PassiveClick;
                 lbl_Points.Content = points.ToString();
+
+                clicksPerSecond = 0;
+                lbl_Clicks.Content = clicksPerSecond.ToString();
             }, this.Dispatcher);
             #endregion
         }
@@ -92,14 +104,39 @@ namespace MuskelKlicker
                     MessageBox.Show("Nicht genügend Geld");
                 }
                 lstbx_shopitems.Items.Refresh();
+
+                //Aktiven Clicker und Passiven Clicker darstellen
+                lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
+                lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            WriteToLabel();
+
+            GetBonusPoints(20);
+        }
+
+        private void WriteToLabel()
+        {
             //Button Aktive Click
             points += clicker.ActiveClick;
             lbl_Points.Content = points.ToString();
+
+
+            // Clicks per Second
+            clicksPerSecond++;
+            lbl_Clicks.Content = clicksPerSecond.ToString();
         }
+
+        private void GetBonusPoints(int bonusPoints)
+        {
+            if (Convert.ToInt32(lbl_Clicks.Content) >= 10)
+            {
+                points += bonusPoints;
+            }
+        }
+
     }
 }

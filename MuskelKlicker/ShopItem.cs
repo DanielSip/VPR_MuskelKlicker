@@ -32,7 +32,7 @@ namespace MuskelKlicker
 
         public override string ToString()
         {
-            return string.Format("Cost:{0} \n Name:{1} \n Description:{2}", Cost, Name, Description);
+            return string.Format("Cost: {0} \n Name: {1} \n Description: {2}", Cost, Name, Description);
         }
     }
 }

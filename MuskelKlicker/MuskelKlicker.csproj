@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -101,6 +102,9 @@
     <Resource Include="ActiveClickPic.png" />
     <Resource Include="MainClickPic.png" />
     <Resource Include="PassiveClickPic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MainBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
