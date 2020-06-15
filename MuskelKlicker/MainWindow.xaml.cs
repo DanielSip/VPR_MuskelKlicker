@@ -40,7 +40,7 @@ namespace MuskelKlicker
             //      -Grafiken einfügen          Done: Andrew John
             //      -Shopitems aus der DB       
             //      -Fortschritt speichern
-            //      -
+            //      
 
             #region Shop und Item Update
             //Items | Clicker
