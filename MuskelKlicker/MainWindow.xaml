@@ -13,10 +13,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="181" Margin="557,10,0,0" VerticalAlignment="Top" Width="350" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick">
-        </ListBox>
+        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="181" Margin="557,10,0,0" VerticalAlignment="Top" Width="350" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick"/>
 
-        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click">
+            <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click">
             <Image Source="MainClickPic.png" Height="396"></Image>
         </Button>
         <Label Content="Points:" HorizontalAlignment="Left" Margin="293,10,0,0" VerticalAlignment="Top" Width="80"/>
