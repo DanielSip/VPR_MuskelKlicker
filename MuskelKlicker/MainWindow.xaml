@@ -24,16 +24,7 @@
         <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="418,157,0,0" VerticalAlignment="Top" Width="100"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="314,72,0,0" VerticalAlignment="Top" Width="80" Source="ActiveClickPic.png"/>
         <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="418,72,0,0" VerticalAlignment="Top" Width="100" Source="PassiveClickPic.png"/>
-        <Label Content="Klicks:" HorizontalAlignment="Left" Margin="293,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
+        <Label Content="Klicks:" HorizontalAlignment="Left" Margin="293,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5"/>
         <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="378,41,0,0" VerticalAlignment="Top" Width="99"/>
 
     </Grid>
