@@ -5,27 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuskelKlicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="924.79" Loaded="Window_Loaded" Background="White">
+        Title="MainWindow" Height="450" Width="924.79" Loaded="Window_Loaded" Background="White" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="MainBackground.png"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="33*"/>
+            <ColumnDefinition Width="556*"/>
+            <ColumnDefinition Width="328*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="181" Margin="557,10,0,0" VerticalAlignment="Top" Width="350" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick"/>
+        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="181" Margin="524.215,10,0,0" VerticalAlignment="Top" Width="350" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick" Grid.ColumnSpan="2" Grid.Column="2"/>
 
-            <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click">
+        <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click" Grid.ColumnSpan="3">
             <Image Source="MainClickPic.png" Height="396"></Image>
         </Button>
-        <Label Content="Points:" HorizontalAlignment="Left" Margin="293,10,0,0" VerticalAlignment="Top" Width="80"/>
-        <Label x:Name="lbl_Points" Content="" HorizontalAlignment="Left" Margin="378,10,0,0" VerticalAlignment="Top" Width="99"/>
-        <Label x:Name="lab_ActiveClick" Content="Aktiver Klick" HorizontalAlignment="Left" Margin="314,157,0,0" VerticalAlignment="Top" Width="99"/>
-        <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="418,157,0,0" VerticalAlignment="Top" Width="100"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="314,72,0,0" VerticalAlignment="Top" Width="80" Source="ActiveClickPic.png"/>
-        <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="418,72,0,0" VerticalAlignment="Top" Width="100" Source="PassiveClickPic.png"/>
-        <Label Content="Klicks:" HorizontalAlignment="Left" Margin="293,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5"/>
-        <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="378,41,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label Content="Points:" HorizontalAlignment="Left" Margin="260.215,10,0,0" VerticalAlignment="Top" Width="80" Grid.Column="2"/>
+        <Label x:Name="lbl_Points" Content="" HorizontalAlignment="Left" Margin="345.215,10,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2"/>
+        <Label x:Name="lab_ActiveClick" Content="Aktiver Klick" HorizontalAlignment="Left" Margin="281.215,157,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2"/>
+        <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="385.215,157,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="281.215,72,0,0" VerticalAlignment="Top" Width="80" Source="ActiveClickPic.png" Grid.Column="2"/>
+        <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="385.215,72,0,0" VerticalAlignment="Top" Width="100" Source="PassiveClickPic.png" Grid.Column="2"/>
+        <Label Content="Klicks:" HorizontalAlignment="Left" Margin="260.215,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5" Grid.Column="2"/>
+        <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="345.215,41,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2"/>
 
     </Grid>
 </Window>
