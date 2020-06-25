@@ -49,5 +49,17 @@ namespace MuskelKlicker
                                                      verbindung);
             kommando.ExecuteNonQuery();
         }
+
+        public void DeleteSpielstand()
+        {
+
+            //OleDbCommand kommando = new OleDbCommand($"INSERT INTO Spielstand (Score, Hanteln, GoldeneHanteln, Protein, Schlafen) " +
+            //                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}')",
+            //                                         verbindung);
+
+            OleDbCommand kommando = new OleDbCommand($"UPDATE Spielstand Set Score = 0, Hanteln = 0, GoldeneHanteln = 0, Protein = 0, Schlafen = 0 Where Spielername = 'Test'",
+                                                     verbindung);
+            kommando.ExecuteNonQuery();
+        }
     }
 }
