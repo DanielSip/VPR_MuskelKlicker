@@ -250,5 +250,50 @@ namespace MuskelKlicker
 
             spielstand.SaveSpielstand(points, countList[0], countList[1], countList[2], countList[3]);
         }
+
+        private void bt_deleteSpielstand_Click(object sender, RoutedEventArgs e)
+        {
+            SpielstandDTB spielstand = new SpielstandDTB();
+            spielstand.DeleteSpielstand();
+
+            List<int> countList = new List<int>();
+            countList = spielstand.GetSpielstand();
+
+            if (countList.Count > 0)
+            {
+                //Übernimmt Punkte
+                points = 100;
+                lbl_Points.Content = points.ToString();
+
+                //Übernimmt Hantel
+                ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
+
+                item.Cost = 10;
+                clicker.ActiveClick = 1;
+                clicker.PassiveClick = 0;
+              
+                //Übernimmt Goldene Hanteln
+                item = (ShopItem)lstbx_shopitems.Items[1];
+
+                item.Cost = 20;
+
+                //Übernimmt Protein
+                item = (ShopItem)lstbx_shopitems.Items[2];
+
+                item.Cost = 200;
+
+                //Übernimmt Schlaf
+                item = (ShopItem)lstbx_shopitems.Items[3];
+
+                item.Cost = 100;
+
+                //zeigt alles nochmal richtig an
+                lstbx_shopitems.Items.Refresh();
+
+                lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
+                lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
+            }
+
+        }
     }
 }
