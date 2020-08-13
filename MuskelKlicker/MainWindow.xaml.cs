@@ -301,7 +301,7 @@ namespace MuskelKlicker
 
         private void bt_PowerUp_Click(object sender, RoutedEventArgs e)
         {
-
+            //ToDo
         }
     }
 }

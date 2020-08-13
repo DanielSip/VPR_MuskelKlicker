@@ -30,6 +30,7 @@
         <Label Content="Klicks:" HorizontalAlignment="Left" Margin="260.215,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5" Grid.Column="2"/>
         <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="345.215,41,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2"/>
         <Button x:Name="bt_deleteSpielstand" Grid.ColumnSpan="2" Content="Delete Spielstand" Grid.Column="2" HorizontalAlignment="Left" Margin="546,217,0,0" VerticalAlignment="Top" Width="107" Click="bt_deleteSpielstand_Click"/>
+        <Button x:Name="bt_PowerUp" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="427,304,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="bt_PowerUp_Click"/>
 
     </Grid>
 </Window>
