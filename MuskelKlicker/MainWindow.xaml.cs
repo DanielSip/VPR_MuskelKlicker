@@ -32,8 +32,6 @@ namespace MuskelKlicker
 
         int clicksPerSecond = 0;
 
-        int multi = 1;
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //ToDo: -Klicks per sec             Done: Andrew John / Dennis
@@ -43,7 +41,6 @@ namespace MuskelKlicker
             //      -Shopitems aus der DB       
             //      -Fortschritt speichern      fehlt Prestige
             //      -Fortschritt aufrufen       fehlt Prestige
-            //      -ListItems --> listItems
 
             #region Shop und Item Update
             //Items | Clicker
@@ -71,13 +68,12 @@ namespace MuskelKlicker
             }
             lbl_Points.Content = points.ToString();
             #endregion
-            
+
             #region Gespeicherten Fortschritt aufrufen
-            /*
-            SpielstandDTB spielstand = new SpielstandDTB();
+            // SpielstandDTB spielstand = new SpielstandDTB();
 
             List<int> countList = new List<int>();
-            countList = spielstand.GetSpielstand();
+            //countList = spielstand.GetSpielstand();
 
             if (countList.Count > 0)
             {
@@ -130,9 +126,9 @@ namespace MuskelKlicker
                 lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
                 lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
             }
-            */
+
             #endregion
-    
+
 
             #region Timer (1 Sec)
 
@@ -155,12 +151,12 @@ namespace MuskelKlicker
                 ShopItem item = (ShopItem)lstbx_shopitems.SelectedItem;
 
                 //Check, ob points vorhanden sind | Kosten erhöhen und A/P klick verbessern
-                if (item.Cost * multi <= points)
+                if (item.Cost <= points)
                 {                        
-                    points -= item.Cost * multi;
+                    points -= item.Cost;
                     item.Cost *= 2;
-                    clicker.ActiveClick += item.UpgradeA * multi; 
-                    clicker.PassiveClick += item.UpgradeP * multi;
+                    clicker.ActiveClick += item.UpgradeA;
+                    clicker.PassiveClick += item.UpgradeP;
                     MessageBox.Show(points.ToString());
                     lbl_Points.Content = points.ToString();
                 }
@@ -205,7 +201,6 @@ namespace MuskelKlicker
 
         private void Window_Closed(object sender, EventArgs e)
         {   
-            /*
             SpielstandDTB spielstand = new SpielstandDTB();
             List<int> countList = new List<int>();
 
@@ -254,12 +249,10 @@ namespace MuskelKlicker
             countList.Add(buyCount);
 
             spielstand.SaveSpielstand(points, countList[0], countList[1], countList[2], countList[3]);
-            */
         }
 
         private void bt_deleteSpielstand_Click(object sender, RoutedEventArgs e)
         {
-            /*
             SpielstandDTB spielstand = new SpielstandDTB();
             spielstand.DeleteSpielstand();
 
@@ -299,25 +292,8 @@ namespace MuskelKlicker
 
                 lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
                 lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
-                
             }
-            */
 
-        }
-
-        private void bt_one_Click(object sender, RoutedEventArgs e)
-        {
-            multi = 1;
-        }
-
-        private void bt_ten_Click(object sender, RoutedEventArgs e)
-        {
-            multi = 10;
-        }
-
-        private void bt_hundred_Click(object sender, RoutedEventArgs e)
-        {
-            multi = 100;
         }
     }
 }
