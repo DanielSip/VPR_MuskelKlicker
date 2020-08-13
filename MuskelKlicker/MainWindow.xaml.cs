@@ -199,7 +199,7 @@ namespace MuskelKlicker
         {
             if (Convert.ToInt32(lbl_Clicks.Content) >= 10)
             {
-                points += bonusPoints;
+                points *= bonusPoints;
             }
         }
 
