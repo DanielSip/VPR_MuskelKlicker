@@ -70,10 +70,10 @@ namespace MuskelKlicker
             #endregion
 
             #region Gespeicherten Fortschritt aufrufen
-            SpielstandDTB spielstand = new SpielstandDTB();
+            // SpielstandDTB spielstand = new SpielstandDTB();
 
             List<int> countList = new List<int>();
-            countList = spielstand.GetSpielstand();
+            //countList = spielstand.GetSpielstand();
 
             if (countList.Count > 0)
             {
