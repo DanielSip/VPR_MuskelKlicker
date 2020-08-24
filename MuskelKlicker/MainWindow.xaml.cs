@@ -28,8 +28,10 @@ namespace MuskelKlicker
         }
 
         Clicker clicker = new Clicker(0, 1);
-        int points = 100;
+        List<ShopItem> ListItems = new List<ShopItem>();
 
+        int points = 100;
+        int multiplyer = 1;
         int clicksPerSecond = 0;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -44,7 +46,8 @@ namespace MuskelKlicker
 
             #region Shop und Item Update
             //Items | Clicker
-            List<ShopItem> ListItems = new List<ShopItem>();
+            lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
+            lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
 
             //Aktive Clicks
             ShopItem hanteln = new ShopItem(10, "Hanteln", "Erhöht dein Klick um 1", 0, 1);
@@ -295,5 +298,71 @@ namespace MuskelKlicker
             }
 
         }
+
+        private void bt_ten_Click(object sender, RoutedEventArgs e)
+        {
+            multiplyer = 10;
+            MultiplyItemCost();
+
+            bt_ten.IsEnabled = false;
+            bt_five.IsEnabled = false;
+            bt_one.IsEnabled = true;
+        }
+
+        private void bt_five_Click(object sender, RoutedEventArgs e)
+        {
+            multiplyer = 5;
+            MultiplyItemCost();
+
+            bt_ten.IsEnabled = false;
+            bt_five.IsEnabled = false;
+            bt_one.IsEnabled = true;
+        }
+
+        private void bt_one_Click(object sender, RoutedEventArgs e)
+        {
+
+            ReduceItemCost();
+            multiplyer = 1;
+            
+            bt_ten.IsEnabled = true;
+            bt_five.IsEnabled = true;
+            bt_one.IsEnabled = false;
+        }
+
+        private void MultiplyItemCost()
+        {
+            foreach (ShopItem item in ListItems)
+            {
+                for (int i = 0; i < multiplyer; i++)
+                {
+                    item.Cost *= 2;
+                    
+                }
+
+                item.UpgradeA *= multiplyer;
+                item.UpgradeP *= multiplyer;
+            }
+            
+
+            lstbx_shopitems.Items.Refresh();
+        }
+
+        private void ReduceItemCost()
+        {
+            foreach (ShopItem item in ListItems)
+            {
+                for (int i = 0; i < multiplyer; i++)
+                {
+                    item.Cost /= 2;
+                }
+
+                item.UpgradeA /= multiplyer;
+                item.UpgradeP /= multiplyer;
+            }
+            lstbx_shopitems.Items.Refresh();
+        }
+
+        
     }
 }
