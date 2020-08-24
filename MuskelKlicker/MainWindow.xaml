@@ -29,8 +29,10 @@
         <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="385.215,72,0,0" VerticalAlignment="Top" Width="100" Source="PassiveClickPic.png" Grid.Column="2"/>
         <Label Content="Klicks:" HorizontalAlignment="Left" Margin="260.215,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5" Grid.Column="2"/>
         <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="345.215,41,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2"/>
-        <Button x:Name="bt_deleteSpielstand" Grid.ColumnSpan="2" Content="Delete Spielstand" Grid.Column="2" HorizontalAlignment="Left" Margin="546,217,0,0" VerticalAlignment="Top" Width="107" Click="bt_deleteSpielstand_Click"/>
-        <Button x:Name="bt_PowerUp" Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="427,304,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="bt_PowerUp_Click"/>
+        <Button x:Name="bt_deleteSpielstand" Grid.ColumnSpan="2" Content="Delete Spielstand" Grid.Column="2" HorizontalAlignment="Left" Margin="524,231,0,0" VerticalAlignment="Top" Width="107" Click="bt_deleteSpielstand_Click"/>
+        <Button x:Name="bt_one" Grid.ColumnSpan="2" Content="1x" Grid.Column="2" HorizontalAlignment="Left" Margin="524,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_one_Click"/>
+        <Button x:Name="bt_ten" Content="10x" Grid.Column="3" HorizontalAlignment="Right" Margin="0,206,141,0" VerticalAlignment="Top" Width="107" Click="bt_ten_Click"/>
+        <Button x:Name="bt_hundred" Content="100x" Grid.Column="3" HorizontalAlignment="Left" Margin="192,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_hundred_Click"/>
 
     </Grid>
 </Window>

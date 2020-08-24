@@ -32,6 +32,8 @@ namespace MuskelKlicker
 
         int clicksPerSecond = 0;
 
+        int multi = 1;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //ToDo: -Klicks per sec             Done: Andrew John / Dennis
@@ -41,6 +43,7 @@ namespace MuskelKlicker
             //      -Shopitems aus der DB       
             //      -Fortschritt speichern      fehlt Prestige
             //      -Fortschritt aufrufen       fehlt Prestige
+            //      -ListItems --> listItems
 
             #region Shop und Item Update
             //Items | Clicker
@@ -68,67 +71,68 @@ namespace MuskelKlicker
             }
             lbl_Points.Content = points.ToString();
             #endregion
-
+            
             #region Gespeicherten Fortschritt aufrufen
-            //SpielstandDTB spielstand = new SpielstandDTB();
+            /*
+            SpielstandDTB spielstand = new SpielstandDTB();
 
-            //List<int> countList = new List<int>();
-            //countList = spielstand.GetSpielstand();
+            List<int> countList = new List<int>();
+            countList = spielstand.GetSpielstand();
 
-            //if (countList.Count > 0)
-            //{
-            //    //Übernimmt Punkte
-            //    points = countList[0];
+            if (countList.Count > 0)
+            {
+                //Übernimmt Punkte
+                points = countList[0];
 
-            //    //Übernimmt Hantel
-            //    ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
-            //    for (int i = 0; i < countList[1]; i++)
-            //    {
-            //        item.Cost *= 2;
-            //        clicker.ActiveClick += item.UpgradeA;
-            //        clicker.PassiveClick += item.UpgradeP;
-            //    }
-            //    lbl_Points.Content = points.ToString();
+                //Übernimmt Hantel
+                ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
+                for (int i = 0; i < countList[1]; i++)
+                {
+                    item.Cost *= 2;
+                    clicker.ActiveClick += item.UpgradeA;
+                    clicker.PassiveClick += item.UpgradeP;
+                }
+                lbl_Points.Content = points.ToString();
 
-            //    //Übernimmt Goldene Hanteln
-            //    item = (ShopItem)lstbx_shopitems.Items[1];
-            //    for (int i = 0; i < countList[2]; i++)
-            //    {
-            //        item.Cost *= 2;
-            //        clicker.ActiveClick += item.UpgradeA;
-            //        clicker.PassiveClick += item.UpgradeP;
-            //    }
-            //    lbl_Points.Content = points.ToString();
+                //Übernimmt Goldene Hanteln
+                item = (ShopItem)lstbx_shopitems.Items[1];
+                for (int i = 0; i < countList[2]; i++)
+                {
+                    item.Cost *= 2;
+                    clicker.ActiveClick += item.UpgradeA;
+                    clicker.PassiveClick += item.UpgradeP;
+                }
+                lbl_Points.Content = points.ToString();
 
-            //    //Übernimmt Protein
-            //    item = (ShopItem)lstbx_shopitems.Items[2];
-            //    for (int i = 0; i < countList[3]; i++)
-            //    {
-            //        item.Cost *= 2;
-            //        clicker.ActiveClick += item.UpgradeA;
-            //        clicker.PassiveClick += item.UpgradeP;
-            //    }
-            //    lbl_Points.Content = points.ToString();
+                //Übernimmt Protein
+                item = (ShopItem)lstbx_shopitems.Items[2];
+                for (int i = 0; i < countList[3]; i++)
+                {
+                    item.Cost *= 2;
+                    clicker.ActiveClick += item.UpgradeA;
+                    clicker.PassiveClick += item.UpgradeP;
+                }
+                lbl_Points.Content = points.ToString();
 
-            //    //Übernimmt Schlaf
-            //    item = (ShopItem)lstbx_shopitems.Items[3];
-            //    for (int i = 0; i < countList[4]; i++)
-            //    {
-            //        item.Cost *= 2;
-            //        clicker.ActiveClick += item.UpgradeA;
-            //        clicker.PassiveClick += item.UpgradeP;
-            //    }
-            //    lbl_Points.Content = points.ToString();
+                //Übernimmt Schlaf
+                item = (ShopItem)lstbx_shopitems.Items[3];
+                for (int i = 0; i < countList[4]; i++)
+                {
+                    item.Cost *= 2;
+                    clicker.ActiveClick += item.UpgradeA;
+                    clicker.PassiveClick += item.UpgradeP;
+                }
+                lbl_Points.Content = points.ToString();
 
-            //    //zeigt alles nochmal richtig an
-            //    lstbx_shopitems.Items.Refresh();
+                //zeigt alles nochmal richtig an
+                lstbx_shopitems.Items.Refresh();
 
-            //    lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
-            //    lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
-            //}
-
+                lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
+                lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
+            }
+            */
             #endregion
-
+    
 
             #region Timer (1 Sec)
 
@@ -141,11 +145,6 @@ namespace MuskelKlicker
 
                 clicksPerSecond = 0;
                 lbl_Clicks.Content = clicksPerSecond.ToString();
-
-                Thickness margin = bt_PowerUp.Margin;
-                margin.Top += 20;
-                bt_PowerUp.Margin = margin;
-
             }, this.Dispatcher);
             #endregion
         }
@@ -156,12 +155,12 @@ namespace MuskelKlicker
                 ShopItem item = (ShopItem)lstbx_shopitems.SelectedItem;
 
                 //Check, ob points vorhanden sind | Kosten erhöhen und A/P klick verbessern
-                if (item.Cost <= points)
+                if (item.Cost * multi <= points)
                 {                        
-                    points -= item.Cost;
+                    points -= item.Cost * multi;
                     item.Cost *= 2;
-                    clicker.ActiveClick += item.UpgradeA;
-                    clicker.PassiveClick += item.UpgradeP;
+                    clicker.ActiveClick += item.UpgradeA * multi; 
+                    clicker.PassiveClick += item.UpgradeP * multi;
                     MessageBox.Show(points.ToString());
                     lbl_Points.Content = points.ToString();
                 }
@@ -206,102 +205,119 @@ namespace MuskelKlicker
 
         private void Window_Closed(object sender, EventArgs e)
         {   
-            //SpielstandDTB spielstand = new SpielstandDTB();
-            //List<int> countList = new List<int>();
+            /*
+            SpielstandDTB spielstand = new SpielstandDTB();
+            List<int> countList = new List<int>();
 
-            ////Zähler für Hanteln
-            //ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
-            //int newCost = item.Cost;
-            //int buyCount = 0;
-            //for (int i = 0;  newCost >= 10; i++)
-            //{
-            //    newCost /= 2;
-            //    buyCount = i;
-            //}
-            //countList.Add(buyCount);
+            //Zähler für Hanteln
+            ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
+            int newCost = item.Cost;
+            int buyCount = 0;
+            for (int i = 0;  newCost >= 10; i++)
+            {
+                newCost /= 2;
+                buyCount = i;
+            }
+            countList.Add(buyCount);
 
-            ////Zähler für Goldene-Hanteln
-            //item = (ShopItem)lstbx_shopitems.Items[1];
-            //newCost = item.Cost;
-            //buyCount = 0;
-            //for (int i = 0; newCost >= 20; i++)
-            //{
-            //    newCost /= 2;
-            //    buyCount = i;
-            //}
-            //countList.Add(buyCount);
+            //Zähler für Goldene-Hanteln
+            item = (ShopItem)lstbx_shopitems.Items[1];
+            newCost = item.Cost;
+            buyCount = 0;
+            for (int i = 0; newCost >= 20; i++)
+            {
+                newCost /= 2;
+                buyCount = i;
+            }
+            countList.Add(buyCount);
 
-            ////Zähler für Protein
-            //item = (ShopItem)lstbx_shopitems.Items[2];
-            //newCost = item.Cost;
-            //buyCount = 0;
-            //for (int i = 0; newCost >= 200; i++)
-            //{
-            //    newCost /= 2;
-            //    buyCount = i;
-            //}
-            //countList.Add(buyCount);
+            //Zähler für Protein
+            item = (ShopItem)lstbx_shopitems.Items[2];
+            newCost = item.Cost;
+            buyCount = 0;
+            for (int i = 0; newCost >= 200; i++)
+            {
+                newCost /= 2;
+                buyCount = i;
+            }
+            countList.Add(buyCount);
 
-            ////Zähler für Schlafen
-            //item = (ShopItem)lstbx_shopitems.Items[3];
-            //newCost = item.Cost;
-            //buyCount = 0;
-            //for (int i = 0; newCost >= 100; i++)
-            //{
-            //    newCost /= 2;
-            //    buyCount = i;
-            //}
-            //countList.Add(buyCount);
+            //Zähler für Schlafen
+            item = (ShopItem)lstbx_shopitems.Items[3];
+            newCost = item.Cost;
+            buyCount = 0;
+            for (int i = 0; newCost >= 100; i++)
+            {
+                newCost /= 2;
+                buyCount = i;
+            }
+            countList.Add(buyCount);
 
-            //spielstand.SaveSpielstand(points, countList[0], countList[1], countList[2], countList[3]);
+            spielstand.SaveSpielstand(points, countList[0], countList[1], countList[2], countList[3]);
+            */
         }
 
         private void bt_deleteSpielstand_Click(object sender, RoutedEventArgs e)
         {
-            //SpielstandDTB spielstand = new SpielstandDTB();
-            //spielstand.DeleteSpielstand();
+            /*
+            SpielstandDTB spielstand = new SpielstandDTB();
+            spielstand.DeleteSpielstand();
 
-            //List<int> countList = new List<int>();
-            //countList = spielstand.GetSpielstand();
+            List<int> countList = new List<int>();
+            countList = spielstand.GetSpielstand();
 
-            //if (countList.Count > 0)
-            //{
-            //    //Übernimmt Punkte
-            //    points = 100;
-            //    lbl_Points.Content = points.ToString();
+            if (countList.Count > 0)
+            {
+                //Übernimmt Punkte
+                points = 100;
+                lbl_Points.Content = points.ToString();
 
-            //    //Übernimmt Hantel
-            //    ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
+                //Übernimmt Hantel
+                ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
 
-            //    item.Cost = 10;
-            //    clicker.ActiveClick = 1;
-            //    clicker.PassiveClick = 0;
+                item.Cost = 10;
+                clicker.ActiveClick = 1;
+                clicker.PassiveClick = 0;
               
-            //    //Übernimmt Goldene Hanteln
-            //    item = (ShopItem)lstbx_shopitems.Items[1];
+                //Übernimmt Goldene Hanteln
+                item = (ShopItem)lstbx_shopitems.Items[1];
 
-            //    item.Cost = 20;
+                item.Cost = 20;
 
-            //    //Übernimmt Protein
-            //    item = (ShopItem)lstbx_shopitems.Items[2];
+                //Übernimmt Protein
+                item = (ShopItem)lstbx_shopitems.Items[2];
 
-            //    item.Cost = 200;
+                item.Cost = 200;
 
-            //    //Übernimmt Schlaf
-            //    item = (ShopItem)lstbx_shopitems.Items[3];
+                //Übernimmt Schlaf
+                item = (ShopItem)lstbx_shopitems.Items[3];
 
-            //    item.Cost = 100;
+                item.Cost = 100;
 
-            //    //zeigt alles nochmal richtig an
-            //    lstbx_shopitems.Items.Refresh();
+                //zeigt alles nochmal richtig an
+                lstbx_shopitems.Items.Refresh();
 
-            //    lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
-            //    lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
+                lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
+                lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
+                
             }
+            */
 
-        private void bt_PowerUp_Click(object sender, RoutedEventArgs e)
+        }
+
+        private void bt_one_Click(object sender, RoutedEventArgs e)
         {
-            //ToDo
+            multi = 1;
+        }
+
+        private void bt_ten_Click(object sender, RoutedEventArgs e)
+        {
+            multi = 10;
+        }
+
+        private void bt_hundred_Click(object sender, RoutedEventArgs e)
+        {
+            multi = 100;
         }
     }
 }
