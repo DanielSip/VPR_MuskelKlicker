@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuskelKlicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="924.79" Loaded="Window_Loaded" Background="White" Closed="Window_Closed">
+        Title="MainWindow" Height="450" Width="925" Loaded="Window_Loaded" Background="White" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="MainBackground.png"/>
@@ -13,26 +13,27 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="33*"/>
-            <ColumnDefinition Width="556*"/>
-            <ColumnDefinition Width="328*"/>
+            <ColumnDefinition Width="884*"/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="181" Margin="524.215,10,0,0" VerticalAlignment="Top" Width="350" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick" Grid.ColumnSpan="2" Grid.Column="2"/>
+        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="181" Margin="524,10,0,0" VerticalAlignment="Top" Width="350" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick" Grid.Column="2"/>
 
         <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click" Grid.ColumnSpan="3">
             <Image Source="MainClickPic.png" Height="396"></Image>
         </Button>
-        <Label Content="Points:" HorizontalAlignment="Left" Margin="260.215,10,0,0" VerticalAlignment="Top" Width="80" Grid.Column="2"/>
-        <Label x:Name="lbl_Points" Content="" HorizontalAlignment="Left" Margin="345.215,10,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2"/>
-        <Label x:Name="lab_ActiveClick" Content="Aktiver Klick" HorizontalAlignment="Left" Margin="281.215,157,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2"/>
-        <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="385.215,157,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="281.215,72,0,0" VerticalAlignment="Top" Width="80" Source="ActiveClickPic.png" Grid.Column="2"/>
-        <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="385.215,72,0,0" VerticalAlignment="Top" Width="100" Source="PassiveClickPic.png" Grid.Column="2"/>
-        <Label Content="Klicks:" HorizontalAlignment="Left" Margin="260.215,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5" Grid.Column="2"/>
-        <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="345.215,41,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2"/>
-        <Button x:Name="bt_deleteSpielstand" Grid.ColumnSpan="2" Content="Delete Spielstand" Grid.Column="2" HorizontalAlignment="Left" Margin="524,231,0,0" VerticalAlignment="Top" Width="107" Click="bt_deleteSpielstand_Click"/>
-        <Button x:Name="bt_one" Grid.ColumnSpan="2" Content="1x" Grid.Column="2" HorizontalAlignment="Left" Margin="524,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_one_Click"/>
-        <Button x:Name="bt_ten" Content="10x" Grid.Column="3" HorizontalAlignment="Right" Margin="0,206,141,0" VerticalAlignment="Top" Width="107" Click="bt_ten_Click"/>
-        <Button x:Name="bt_hundred" Content="100x" Grid.Column="3" HorizontalAlignment="Left" Margin="192,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_hundred_Click"/>
+        <Label Content="Points:" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" Width="80" Grid.Column="2" Height="26"/>
+        <Label x:Name="lbl_Points" Content="" HorizontalAlignment="Left" Margin="345,10,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2" Height="26"/>
+        <Label x:Name="lab_ActiveClick" Content="Aktiver Klick" HorizontalAlignment="Left" Margin="262,157,0,0" VerticalAlignment="Top" Width="118" Grid.Column="2" Height="26"/>
+        <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="385,157,0,0" VerticalAlignment="Top" Width="134" Grid.Column="2" Height="26"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="281,72,0,0" VerticalAlignment="Top" Width="80" Source="ActiveClickPic.png" Grid.Column="2"/>
+        <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="385,72,0,0" VerticalAlignment="Top" Width="100" Source="PassiveClickPic.png" Grid.Column="2"/>
+        <Label Content="Klicks:" HorizontalAlignment="Left" Margin="260,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5" Grid.Column="2" Height="26"/>
+        <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="345,41,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2" Height="26"/>
+        <Button x:Name="bt_deleteSpielstand" Content="Delete Spielstand" Grid.Column="2" HorizontalAlignment="Left" Margin="524,231,0,0" VerticalAlignment="Top" Width="107" Click="bt_deleteSpielstand_Click" Height="20"/>
+        <Button x:Name="bt_one" Content="1x" Grid.Column="2" HorizontalAlignment="Left" Margin="524,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_one_Click" Height="20"/>
+        <Button x:Name="bt_ten" Content="10x" Grid.Column="2" HorizontalAlignment="Right" Margin="0,206,141,0" VerticalAlignment="Top" Width="107" Click="bt_ten_Click" Height="20"/>
+        <Button x:Name="bt_hundred" Content="100x" Grid.Column="2" HorizontalAlignment="Left" Margin="748,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_hundred_Click" Height="20"/>
+        <Button x:Name="bt_powerUP" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="508,312,0,0" VerticalAlignment="Top" Width="25" Height="25" Click="bt_powerUP_Click" Visibility="Hidden" IsEnabled="False"/>
 
     </Grid>
 </Window>
