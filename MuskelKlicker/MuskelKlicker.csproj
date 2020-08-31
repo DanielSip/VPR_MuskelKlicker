@@ -58,12 +58,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Clicker.cs" />
-    <Compile Include="Hauptmenu.xaml.cs">
-      <DependentUpon>Hauptmenu.xaml</DependentUpon>
+    <Compile Include="MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="ShopItem.cs" />
+    <Compile Include="ShopItemsDB.cs" />
     <Compile Include="SpielstandDTB.cs" />
-    <Page Include="Hauptmenu.xaml">
+    <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

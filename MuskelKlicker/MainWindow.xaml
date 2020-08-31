@@ -1,11 +1,11 @@
-﻿<Window x:Class="MuskelKlicker.MainWindow"
+﻿<Window x:Name="MuskelKlicker" x:Class="MuskelKlicker.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MuskelKlicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="925" Loaded="Window_Loaded" Background="White" Closed="Window_Closed">
+        Title="MuskelKlicker" Height="450" Width="925" Loaded="Window_Loaded" Background="White" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="MainBackground.png"/>
@@ -16,7 +16,7 @@
             <ColumnDefinition Width="884*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lstbx_shopitems" HorizontalAlignment="Left" Height="181" Margin="524,10,0,0" VerticalAlignment="Top" Width="350" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick" Grid.Column="2"/>
+        <ListBox x:Name="lstbx_shopitems" Height="181" Margin="524,10,10,0" VerticalAlignment="Top" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick" Grid.ColumnSpan="2" Grid.Column="2"/>
 
         <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click" Grid.ColumnSpan="3">
             <Image Source="MainClickPic.png" Height="396"></Image>
