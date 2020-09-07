@@ -340,7 +340,7 @@ namespace MuskelKlicker
 
             ReduceItemCost();
             multiplyer = 1;
-            
+
             bt_ten.IsEnabled = true;
             bt_five.IsEnabled = true;
             bt_one.IsEnabled = false;
