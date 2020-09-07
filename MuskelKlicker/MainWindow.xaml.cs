@@ -26,6 +26,7 @@ namespace MuskelKlicker
         {
             InitializeComponent();
         }
+        Random rnd = new Random();
 
         Clicker clicker = new Clicker(0, 1);
         List<ShopItem> ListItems = new List<ShopItem>();
@@ -144,6 +145,21 @@ namespace MuskelKlicker
 
                 clicksPerSecond = 0;
                 lbl_Clicks.Content = clicksPerSecond.ToString();
+
+
+                // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
+                if(rnd.Next(0,2) == 1)
+                {
+                    bt_powerUP_spawn();
+                }
+                else
+                {
+                    bt_powerUP.IsEnabled = false;
+                    bt_powerUP.Visibility = Visibility.Hidden;
+                }
+
+                
+                
             }, this.Dispatcher);
             #endregion
         }
@@ -363,6 +379,27 @@ namespace MuskelKlicker
             lstbx_shopitems.Items.Refresh();
         }
 
-        
+        private void bt_powerUP_spawn()
+        {
+            bt_powerUP.Visibility = Visibility.Visible;
+            bt_powerUP.IsEnabled = true;
+            MainWindow m = new MainWindow();
+
+            //Höhe und Breite des MainWindows
+            var width = Window.GetWindow(m).Width;
+            var height = Window.GetWindow(m).Height;
+
+            //Zufallskoordinaten für den PowerUP-Button
+            double rndWidth = rnd.Next(50, (int)width - 50);
+            double rndHeight = rnd.Next(50, (int)height - 50);
+
+            bt_powerUP.Margin = new Thickness(rndWidth, rndHeight, 0, 0);
+
+        }
+
+        private void bt_powerUP_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
