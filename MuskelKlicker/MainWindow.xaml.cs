@@ -431,5 +431,10 @@ namespace MuskelKlicker
         {
             clicker.ActiveClick *= multiplier;
         }
+
+        private void lstbx_shopitemsPrestige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //Do Shit
+        }
     }
 }
