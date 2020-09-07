@@ -31,8 +31,8 @@
         <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="345,41,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2" Height="26"/>
         <Button x:Name="bt_deleteSpielstand" Content="Delete Spielstand" Grid.Column="2" HorizontalAlignment="Left" Margin="524,231,0,0" VerticalAlignment="Top" Width="107" Click="bt_deleteSpielstand_Click" Height="20"/>
         <Button x:Name="bt_one" Content="1x" Grid.Column="2" HorizontalAlignment="Left" Margin="524,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_one_Click" Height="20"/>
-        <Button x:Name="bt_ten" Content="10x" Grid.Column="2" HorizontalAlignment="Right" Margin="0,206,141,0" VerticalAlignment="Top" Width="107" Click="bt_ten_Click" Height="20"/>
-        <Button x:Name="bt_hundred" Content="100x" Grid.Column="2" HorizontalAlignment="Left" Margin="748,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_hundred_Click" Height="20"/>
+        <Button x:Name="bt_five" Content="5x" Grid.Column="2" HorizontalAlignment="Right" Margin="0,206,141,0" VerticalAlignment="Top" Width="107" Click="bt_five_Click" Height="20"/>
+        <Button x:Name="bt_ten" Content="10x" Grid.Column="2" HorizontalAlignment="Left" Margin="748,206,0,0" VerticalAlignment="Top" Width="107" Click="bt_ten_Click" Height="20"/>
         <Button x:Name="bt_powerUP" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="508,312,0,0" VerticalAlignment="Top" Width="25" Height="25" Click="bt_powerUP_Click" Visibility="Hidden" IsEnabled="False"/>
 
     </Grid>
