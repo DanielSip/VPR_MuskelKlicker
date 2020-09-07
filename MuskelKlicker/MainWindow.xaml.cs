@@ -17,14 +17,16 @@ using System.Timers;
 
 namespace MuskelKlicker
 {
-    /// <summary>
+    /// <s0000000ummary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        string user;
+        public MainWindow(string user)
         {
             InitializeComponent();
+            this.user = user;
         }
         Random rnd = new Random();
 
@@ -37,6 +39,7 @@ namespace MuskelKlicker
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(user);
             //ToDo: -Klicks per sec             Done: Andrew John / Dennis
             //      -Reset von klicks per sec   Done: Andrew John / Dennis
             //      -Klickbonus                 Done: Andrew John
@@ -74,10 +77,10 @@ namespace MuskelKlicker
             #endregion
 
             #region Gespeicherten Fortschritt aufrufen
-            // SpielstandDTB spielstand = new SpielstandDTB();
+            SpielstandDTB spielstand = new SpielstandDTB();
 
             List<int> countList = new List<int>();
-            //countList = spielstand.GetSpielstand();
+            countList = spielstand.GetSpielstand(user);
 
             if (countList.Count > 0)
             {
@@ -267,16 +270,18 @@ namespace MuskelKlicker
             }
             countList.Add(buyCount);
 
-            spielstand.SaveSpielstand(points, countList[0], countList[1], countList[2], countList[3]);
+            spielstand.SaveSpielstand(points, countList[0], countList[1], countList[2], countList[3], user);
+            MessageBox.Show("Hallo");
+            Close();
         }
 
         private void bt_deleteSpielstand_Click(object sender, RoutedEventArgs e)
         {
             SpielstandDTB spielstand = new SpielstandDTB();
-            spielstand.DeleteSpielstand();
+            spielstand.DeleteSpielstand(user);
 
             List<int> countList = new List<int>();
-            countList = spielstand.GetSpielstand();
+            countList = spielstand.GetSpielstand(user);
 
             if (countList.Count > 0)
             {
@@ -360,7 +365,6 @@ namespace MuskelKlicker
                 item.UpgradeP *= multiplyer;
             }
             
-
             lstbx_shopitems.Items.Refresh();
         }
 
@@ -383,7 +387,7 @@ namespace MuskelKlicker
         {
             bt_powerUP.Visibility = Visibility.Visible;
             bt_powerUP.IsEnabled = true;
-            MainWindow m = new MainWindow();
+            MainWindow m = new MainWindow("");
 
             //Höhe und Breite des MainWindows
             var width = Window.GetWindow(m).Width;

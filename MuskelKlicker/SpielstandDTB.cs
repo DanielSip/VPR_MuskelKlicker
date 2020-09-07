@@ -14,14 +14,14 @@ namespace MuskelKlicker
 
         public SpielstandDTB()
         {
-            verbindung = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.15.0;" +
-                                             @"Data Source=../../Datenbanken.accdb");
+            verbindung = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;" +
+                                             @"Data Source=../../../Datenbanken.accdb");
             verbindung.Open();
         }
 
-        public List<int> GetSpielstand()
+        public List<int> GetSpielstand(string user)
         {
-            string sql = "select * from Spielstand";
+            string sql = string.Format("select * from Spielstand WHERE Spielername = '{0}'",user);
             OleDbCommand kommando = new OleDbCommand(sql, verbindung);
             OleDbDataReader reader = kommando.ExecuteReader();
 
@@ -38,28 +38,67 @@ namespace MuskelKlicker
                 
         }
 
-        public void SaveSpielstand(int scoreAnzahl, int hantelAnzahl, int goldeneHantelnAnzahl, int proteinAnzahl, int schlafAnzahl)
+        public List<string> GetUsers()
+        {
+            List<string> spielerListe = new List<string>();
+
+            OleDbCommand kommando = new OleDbCommand("SELECT Spielername FROM Spielstand", verbindung);
+            OleDbDataReader reader = kommando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                spielerListe.Add(reader.GetString(0));
+            }            
+
+            return spielerListe;
+        }
+
+        public void SaveSpielstand(int scoreAnzahl, int hantelAnzahl, int goldeneHantelnAnzahl, int proteinAnzahl, int schlafAnzahl, string user)
+        {
+
+            
+
+            OleDbCommand kommando = new OleDbCommand("SELECT id FROM Spielstand Where Spielername = '"+ user +"'", verbindung);
+            OleDbDataReader reader = kommando.ExecuteReader();
+
+            if (!reader.HasRows)
+            {
+                kommando = new OleDbCommand($"INSERT INTO Spielstand (Score, Hanteln, GoldeneHanteln, Protein, Schlafen, Spielername) " +
+                                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}', '{user}')",
+                                                         verbindung);
+            }
+            else
+            {
+                kommando = new OleDbCommand($"UPDATE Spielstand Set Score = '{scoreAnzahl}', Hanteln ={hantelAnzahl}, GoldeneHanteln ={goldeneHantelnAnzahl}, Protein={proteinAnzahl}, Schlafen={schlafAnzahl} Where Spielername = '" + user + "'",
+                                                                     verbindung);
+            }
+          
+            kommando.ExecuteNonQuery();
+        }
+
+        public void DeleteSpielstand(string user)
         {
 
             //OleDbCommand kommando = new OleDbCommand($"INSERT INTO Spielstand (Score, Hanteln, GoldeneHanteln, Protein, Schlafen) " +
             //                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}')",
             //                                         verbindung);
 
-            OleDbCommand kommando = new OleDbCommand($"UPDATE Spielstand Set Score = '{scoreAnzahl}', Hanteln ={hantelAnzahl}, GoldeneHanteln ={goldeneHantelnAnzahl}, Protein={proteinAnzahl}, Schlafen={schlafAnzahl} Where Spielername = 'Test'",                                                
+            OleDbCommand kommando = new OleDbCommand("DELETE Spielstand WHERE Spielername = '"+ user +"'",
                                                      verbindung);
             kommando.ExecuteNonQuery();
         }
 
-        public void DeleteSpielstand()
+        public Boolean UserExists(string user)
         {
+            OleDbCommand kommando = new OleDbCommand("SELECT id FROM Spielstand Where Spielername = '" + user + "'", verbindung);
+            OleDbDataReader reader = kommando.ExecuteReader();
 
-            //OleDbCommand kommando = new OleDbCommand($"INSERT INTO Spielstand (Score, Hanteln, GoldeneHanteln, Protein, Schlafen) " +
-            //                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}')",
-            //                                         verbindung);
+            if (!reader.HasRows)
+            {
+                return false;
+            } 
 
-            OleDbCommand kommando = new OleDbCommand($"UPDATE Spielstand Set Score = 0, Hanteln = 0, GoldeneHanteln = 0, Protein = 0, Schlafen = 0 Where Spielername = 'Test'",
-                                                     verbindung);
-            kommando.ExecuteNonQuery();
+            return true;
         }
     }
 }
