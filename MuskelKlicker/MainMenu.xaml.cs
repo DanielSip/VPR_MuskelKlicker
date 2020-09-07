@@ -97,5 +97,19 @@ namespace MuskelKlicker
             txt_newName.Visibility = Visibility.Hidden;
         }
 
+        private void bt_DeleteSave_Click(object sender, RoutedEventArgs e)
+        {
+            SpielstandDTB spielstand = new SpielstandDTB();
+            spielstand.DeleteSpielstand(user);
+
+            spieler.RemoveAt(pos);
+
+            MessageBox.Show("User " + user + "wurde gelöscht");
+
+            bt_ChangeUser_Click(sender, e);
+
+
+
+        }
     }
 }

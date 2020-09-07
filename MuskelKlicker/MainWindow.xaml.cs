@@ -23,11 +23,13 @@ namespace MuskelKlicker
     public partial class MainWindow : Window
     {
         string user;
+
         public MainWindow(string user)
         {
             InitializeComponent();
             this.user = user;
         }
+
         Random rnd = new Random();
 
         Clicker clicker = new Clicker(0, 1);
@@ -40,7 +42,6 @@ namespace MuskelKlicker
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(user);
             //ToDo: -Klicks per sec             Done: Andrew John / Dennis
             //      -Reset von klicks per sec   Done: Andrew John / Dennis
             //      -Klickbonus                 Done: Andrew John
@@ -281,53 +282,7 @@ namespace MuskelKlicker
             countList.Add(buyCount);
 
             spielstand.SaveSpielstand(points, countList[0], countList[1], countList[2], countList[3], user);
-            MessageBox.Show("Hallo");
             Close();
-        }
-
-        private void bt_deleteSpielstand_Click(object sender, RoutedEventArgs e)
-        {
-            SpielstandDTB spielstand = new SpielstandDTB();
-            spielstand.DeleteSpielstand(user);
-
-            List<int> countList = new List<int>();
-            countList = spielstand.GetSpielstand(user);
-
-            if (countList.Count > 0)
-            {
-                //Übernimmt Punkte
-                points = 100;
-                lbl_Points.Content = points.ToString();
-
-                //Übernimmt Hantel
-                ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
-
-                item.Cost = 10;
-                clicker.ActiveClick = 1;
-                clicker.PassiveClick = 0;
-              
-                //Übernimmt Goldene Hanteln
-                item = (ShopItem)lstbx_shopitems.Items[1];
-
-                item.Cost = 20;
-
-                //Übernimmt Protein
-                item = (ShopItem)lstbx_shopitems.Items[2];
-
-                item.Cost = 200;
-
-                //Übernimmt Schlaf
-                item = (ShopItem)lstbx_shopitems.Items[3];
-
-                item.Cost = 100;
-
-                //zeigt alles nochmal richtig an
-                lstbx_shopitems.Items.Refresh();
-
-                lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
-                lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
-            }
-
         }
 
         private void bt_ten_Click(object sender, RoutedEventArgs e)

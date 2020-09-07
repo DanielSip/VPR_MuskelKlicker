@@ -15,7 +15,7 @@ namespace MuskelKlicker
         public SpielstandDTB()
         {
             verbindung = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;" +
-                                             @"Data Source=../../../Datenbanken.accdb");
+                                             @"Data Source=../../Datenbanken.accdb");
             verbindung.Open();
         }
 
@@ -83,7 +83,7 @@ namespace MuskelKlicker
             //                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}')",
             //                                         verbindung);
 
-            OleDbCommand kommando = new OleDbCommand("DELETE Spielstand WHERE Spielername = '"+ user +"'",
+            OleDbCommand kommando = new OleDbCommand("DELETE from Spielstand WHERE Spielername = '"+ user +"'",
                                                      verbindung);
             kommando.ExecuteNonQuery();
         }
