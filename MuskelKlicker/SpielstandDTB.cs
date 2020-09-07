@@ -14,8 +14,8 @@ namespace MuskelKlicker
 
         public SpielstandDTB()
         {
-            verbindung = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.15.0;" +
-                                             @"Data Source=../../Datenbanken.accdb");
+            verbindung = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;" +
+                                             @"Data Source=../../../Datenbanken.accdb");
             verbindung.Open();
         }
 
