@@ -83,6 +83,7 @@
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrestigeItem.cs" />
     <Compile Include="ShopItem.cs" />
     <Compile Include="ShopItemsDB.cs" />
     <Compile Include="SpielstandDTB.cs" />

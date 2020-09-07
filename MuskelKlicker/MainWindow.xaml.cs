@@ -32,6 +32,7 @@ namespace MuskelKlicker
 
         Clicker clicker = new Clicker(0, 1);
         List<ShopItem> ListItems = new List<ShopItem>();
+        List<PrestigeItem> prestigeItems = new List<PrestigeItem>();
 
         int points = 100;
         int multiplyer = 1;
@@ -61,11 +62,20 @@ namespace MuskelKlicker
             //Passive Clicks
             ShopItem schlaf = new ShopItem(100, "Schlafen", "Erhöht den Passive um 10", 10, 0);
 
+            //Prestige
+            PrestigeItem gutesBett = new PrestigeItem(100000, "Gutes Bett", "Verringert die Kosten durch 2 von normalen Shop items", 2);
+            PrestigeItem guteHanteln = new PrestigeItem(100000, "Gute Hanteln", "Verringert die Kosten durch 3 von normalen Shop items", 3);
+            PrestigeItem perfekteHanteln = new PrestigeItem(100000, "Perfekte Hanteln", "Verringert die Kosten durch 4 von normalen Shop items", 4);
+
             //Add Items
             ListItems.Add(hanteln);
             ListItems.Add(gHanteln);
             ListItems.Add(protein);
             ListItems.Add(schlaf);
+
+            prestigeItems.Add(gutesBett);
+            prestigeItems.Add(guteHanteln);
+            prestigeItems.Add(perfekteHanteln);
 
 
             //Shop mit Items erstellen
@@ -438,7 +448,28 @@ namespace MuskelKlicker
 
         private void lstbx_shopitemsPrestige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //Do Shit
+            if (lstbx_shopitemsPrestige.SelectedItem != null)
+            {
+                PrestigeItem item = (PrestigeItem)lstbx_shopitemsPrestige.SelectedItem;
+
+                //Check, ob points vorhanden sind | Kosten erhöhen und A/P klick verbessern
+                if (item.Cost <= points)
+                {
+                    points -= item.Cost;
+                    foreach (ShopItem shopitem in lstbx_shopitems.Items)
+                    {
+                        shopitem.Cost /= item.Advantage;
+                    }
+                    item.Cost *= 2;
+                    lbl_Points.Content = points.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Nicht genügend Geld");
+                }
+                lstbx_shopitemsPrestige.Items.Refresh();
+
+            }
         }
     }
 }
