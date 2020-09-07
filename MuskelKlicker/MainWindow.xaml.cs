@@ -148,7 +148,7 @@ namespace MuskelKlicker
 
 
                 // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
-                if(rnd.Next(0,2) == 1)
+                if(rnd.Next(0,100) == 1)
                 {
                     bt_powerUP_spawn();
                 }
@@ -379,8 +379,24 @@ namespace MuskelKlicker
             lstbx_shopitems.Items.Refresh();
         }
 
+        //Dennis Martens
         private void bt_powerUP_spawn()
         {
+            int duration = 5;
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                if (duration > 0)
+                {
+                    duration--;
+                }
+                else
+                {
+                    bt_powerUP.Visibility = Visibility.Hidden;
+                    bt_powerUP.IsEnabled = false;
+                }
+
+            }, this.Dispatcher);
+
             bt_powerUP.Visibility = Visibility.Visible;
             bt_powerUP.IsEnabled = true;
             MainWindow m = new MainWindow();
@@ -394,12 +410,26 @@ namespace MuskelKlicker
             double rndHeight = rnd.Next(50, (int)height - 50);
 
             bt_powerUP.Margin = new Thickness(rndWidth, rndHeight, 0, 0);
-
         }
 
         private void bt_powerUP_Click(object sender, RoutedEventArgs e)
         {
+            powerUPeffect(10);
+            int duration = 30;
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, duration), DispatcherPriority.Normal, delegate
+            {
+                duration = 30;
+                clicker.ActiveClick /= 10;
+            }, this.Dispatcher);
 
+            bt_powerUP.IsEnabled = false;
+            bt_powerUP.Visibility = Visibility.Hidden;
+            
+        }
+
+        private void powerUPeffect(int multiplier)
+        {
+            clicker.ActiveClick *= multiplier;
         }
     }
 }
