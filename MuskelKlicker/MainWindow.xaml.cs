@@ -345,7 +345,7 @@ namespace MuskelKlicker
 
             ReduceItemCost();
             multiplyer = 1;
-            
+
             bt_ten.IsEnabled = true;
             bt_five.IsEnabled = true;
             bt_one.IsEnabled = false;
@@ -404,6 +404,11 @@ namespace MuskelKlicker
         private void bt_powerUP_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void lstbx_shopitemsPrestige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //Do Shit
         }
     }
 }
