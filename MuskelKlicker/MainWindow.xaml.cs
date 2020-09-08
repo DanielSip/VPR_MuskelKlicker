@@ -39,6 +39,8 @@ namespace MuskelKlicker
         int points = 10000000;
         int multiplyer = 1;
         int clicksPerSecond = 0;
+        
+        List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -225,7 +227,29 @@ namespace MuskelKlicker
 
             // Clicks per Second
             clicksPerSecond++;
-            lbl_Clicks.Content = clicksPerSecond.ToString();
+            lastClicks.Add(clicksPerSecond);
+            ClicksPerSecond();
+        }
+
+
+        private void ClicksPerSecond()
+        {
+            if (lastClicks.Count >= 10)
+            {
+                lastClicks.RemoveAt(0);
+            }
+
+            float avgCPS = 0;
+            int cpsSum = 0;
+
+            foreach (var number in lastClicks)
+            {
+                cpsSum += number;
+            }
+
+            avgCPS = cpsSum / lastClicks.Count;
+
+            lbl_Clicks.Content = avgCPS;
         }
 
         private void GetBonusPoints(int bonusPoints)
