@@ -268,47 +268,19 @@ namespace MuskelKlicker
 
             //Zähler für Hanteln
             ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
-            int newCost = item.Cost;
-            int buyCount = 0;
-            for (int i = 0;  newCost >= 10; i++)
-            {
-                newCost /= 2;
-                buyCount = i;
-            }
-            countList.Add(buyCount);
+            countList.Add(item.Amount);
 
             //Zähler für Goldene-Hanteln
             item = (ShopItem)lstbx_shopitems.Items[1];
-            newCost = item.Cost;
-            buyCount = 0;
-            for (int i = 0; newCost >= 20; i++)
-            {
-                newCost /= 2;
-                buyCount = i;
-            }
-            countList.Add(buyCount);
+            countList.Add(item.Amount);
 
             //Zähler für Protein
             item = (ShopItem)lstbx_shopitems.Items[2];
-            newCost = item.Cost;
-            buyCount = 0;
-            for (int i = 0; newCost >= 200; i++)
-            {
-                newCost /= 2;
-                buyCount = i;
-            }
-            countList.Add(buyCount);
+            countList.Add(item.Amount);
 
             //Zähler für Schlafen
             item = (ShopItem)lstbx_shopitems.Items[3];
-            newCost = item.Cost;
-            buyCount = 0;
-            for (int i = 0; newCost >= 100; i++)
-            {
-                newCost /= 2;
-                buyCount = i;
-            }
-            countList.Add(buyCount);
+            countList.Add(item.Amount);
 
             spielstand.SaveSpielstand(points, countList[0], countList[1], countList[2], countList[3], user);
             Close();

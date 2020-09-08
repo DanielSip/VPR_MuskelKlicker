@@ -74,6 +74,7 @@ namespace MuskelKlicker
             }
           
             kommando.ExecuteNonQuery();
+            verbindung.Close();
         }
 
         public void DeleteSpielstand(string user)

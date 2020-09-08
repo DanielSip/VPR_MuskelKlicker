@@ -1,14 +1,31 @@
-﻿<Page x:Class="MuskelKlicker.Credits"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MuskelKlicker"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Credits" Background="White">
-
+﻿<Window x:Class="MuskelKlicker.Credits"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MuskelKlicker"
+        mc:Ignorable="d"
+        Title="Credits" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="MainBackground.png"/>
+    </Window.Background>
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <Button x:Name="bt_menu" Content="back to menu" HorizontalAlignment="Left" Margin="350,390,0,0" VerticalAlignment="Top" Width="100" FontFamily="Microsoft Himalaya" FontSize="20" Click="bt_menu_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label Content="Andrew John Lariat" HorizontalAlignment="Left" Margin="326,126,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
+        <Label Content="Daniel Sippel" HorizontalAlignment="Left" Margin="350,170,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
+        <Label Content="Dennis Mertens" HorizontalAlignment="Left" Margin="340,220,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
+        <Label Content="Lars Meykel Stuhlmacher" HorizontalAlignment="Left" Margin="308,271,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
+        <Label Content="MuskelKlicker" HorizontalAlignment="Left" Margin="305,22,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Microsoft Himalaya"/>
+
     </Grid>
-</Page>
+</Window>

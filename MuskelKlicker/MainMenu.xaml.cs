@@ -127,5 +127,12 @@ namespace MuskelKlicker
 
 
         }
+
+        private void bt_Credits_Click(object sender, RoutedEventArgs e)
+        {
+            Credits credits = new Credits();
+            Close();
+            credits.Show();
+        }
     }
 }

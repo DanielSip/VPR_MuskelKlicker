@@ -16,24 +16,59 @@
             <ColumnDefinition Width="884*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lstbx_shopitems" Height="181" Margin="524,10,10,0" VerticalAlignment="Top" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick" Grid.ColumnSpan="2" Grid.Column="2"/>
+        <ListBox x:Name="lstbx_shopitems" Height="181" Margin="524,10,10,0" VerticalAlignment="Top" MouseDoubleClick="lstbx_shopitems_MouseDoubleClick" Grid.ColumnSpan="2" Grid.Column="2" FontSize="20" FontFamily="Microsoft Himalaya">
+            <ListBox.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFB6358D" Offset="0.957"/>
+                    <GradientStop Color="#FFA016A6" Offset="0.277"/>
+                </RadialGradientBrush>
+            </ListBox.Background>
+        </ListBox>
 
         <Button HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="278" Height="399" Click="Button_Click" Grid.ColumnSpan="3">
             <Image Source="MainClickPic.png" Height="396"></Image>
         </Button>
-        <Label Content="Points:" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" Width="80" Grid.Column="2" Height="26"/>
+        <Label Content="Points:" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" Width="80" Grid.Column="2" Height="26" FontFamily="Microsoft Himalaya" FontSize="20"/>
         <Label x:Name="lbl_Points" Content="" HorizontalAlignment="Left" Margin="345,10,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2" Height="26"/>
-        <Label x:Name="lab_ActiveClick" Content="Aktiver Klick" HorizontalAlignment="Left" Margin="281.2,157,0,0" VerticalAlignment="Top" Width="118" Grid.Column="2" Height="26"/>
-        <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="271.2,282,0,0" VerticalAlignment="Top" Width="134" Grid.Column="2" Height="26"/>
+        <Label x:Name="lab_ActiveClick" Content="Aktiver Klick" HorizontalAlignment="Left" Margin="281.2,157,0,0" VerticalAlignment="Top" Width="118" Grid.Column="2" Height="26" FontFamily="Microsoft Himalaya" FontSize="20"/>
+        <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="271.2,282,0,0" VerticalAlignment="Top" Width="134" Grid.Column="2" Height="26" FontFamily="Microsoft Himalaya" FontSize="20"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="281,72,0,0" VerticalAlignment="Top" Width="80" Source="ActiveClickPic.png" Grid.Column="2"/>
         <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="271.2,197,0,0" VerticalAlignment="Top" Width="100" Source="PassiveClickPic.png" Grid.Column="2"/>
-        <Label Content="Klicks:" HorizontalAlignment="Left" Margin="260,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5" Grid.Column="2" Height="26"/>
+        <Label Content="Klicks:" HorizontalAlignment="Left" Margin="260,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5" Grid.Column="2" Height="26" FontSize="20" FontFamily="Microsoft Himalaya"/>
         <Label x:Name="lbl_Clicks" Content="" HorizontalAlignment="Left" Margin="345,41,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2" Height="26"/>
-        <Button x:Name="bt_one" Content="1x" Grid.Column="2" HorizontalAlignment="Left" Margin="524.2,197,0,0" VerticalAlignment="Top" Width="107" Click="bt_one_Click" Height="20"/>
-        <Button x:Name="bt_five" Content="5x" Grid.Column="2" HorizontalAlignment="Right" Margin="0,197,142.4,0" VerticalAlignment="Top" Width="107" Click="bt_five_Click" Height="20"/>
-        <Button x:Name="bt_ten" Content="10x" Grid.Column="2" HorizontalAlignment="Left" Margin="748.2,197,0,0" VerticalAlignment="Top" Width="107" Click="bt_ten_Click" Height="20"/>
+        <Button x:Name="bt_one" Content="1x" Grid.Column="2" HorizontalAlignment="Left" Margin="524.2,197,0,0" VerticalAlignment="Top" Width="107" Click="bt_one_Click" Height="20" FontFamily="Microsoft Himalaya" FontSize="22">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="bt_five" Content="5x" Grid.Column="2" HorizontalAlignment="Right" Margin="0,197,142.4,0" VerticalAlignment="Top" Width="107" Click="bt_five_Click" Height="20" FontFamily="Microsoft Himalaya" FontSize="22">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="bt_ten" Content="10x" Grid.Column="2" HorizontalAlignment="Left" Margin="748.2,197,0,0" VerticalAlignment="Top" Width="107" Click="bt_ten_Click" Height="20" FontFamily="Microsoft Himalaya" FontSize="22">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button x:Name="bt_powerUP" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="508,312,0,0" VerticalAlignment="Top" Width="25" Height="25" Click="bt_powerUP_Click" Visibility="Hidden" IsEnabled="False"/>
-        <ListBox x:Name="lstbx_shopitemsPrestige" Height="181" Margin="524.2,231,10.4,0" VerticalAlignment="Top" Grid.Column="2" MouseDoubleClick="lstbx_shopitemsPrestige_MouseDoubleClick"/>
+        <ListBox x:Name="lstbx_shopitemsPrestige" Height="181" Margin="524.2,231,10.4,0" VerticalAlignment="Top" Grid.Column="2" MouseDoubleClick="lstbx_shopitemsPrestige_MouseDoubleClick" FontFamily="Microsoft Himalaya" FontSize="20">
+            <ListBox.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FFB6358D" Offset="0.28"/>
+                    <GradientStop Color="#FFA016A6" Offset="0.86"/>
+                </RadialGradientBrush>
+            </ListBox.Background>
+        </ListBox>
 
     </Grid>
 </Window>

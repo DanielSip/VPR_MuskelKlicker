@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MuskelKlicker
@@ -18,11 +17,18 @@ namespace MuskelKlicker
     /// <summary>
     /// Interaktionslogik für Credits.xaml
     /// </summary>
-    public partial class Credits : Page
+    public partial class Credits : Window
     {
         public Credits()
         {
             InitializeComponent();
+        }
+
+        private void bt_menu_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenu menu = new MainMenu();
+            Close();
+            menu.Show();
         }
     }
 }

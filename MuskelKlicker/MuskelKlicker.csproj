@@ -80,12 +80,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Clicker.cs" />
+    <Compile Include="Credits.xaml.cs">
+      <DependentUpon>Credits.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="PrestigeItem.cs" />
     <Compile Include="ShopItem.cs" />
     <Compile Include="SpielstandDTB.cs" />
+    <Page Include="Credits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -6,16 +6,61 @@
         xmlns:local="clr-namespace:MuskelKlicker"
         mc:Ignorable="d"
         Title="MainMenu" Height="450" Width="800" ResizeMode="NoResize" Loaded="MainMenu1_Loaded">
+    <Window.Background>
+        <ImageBrush ImageSource="MainBackground.png"/>
+    </Window.Background>
     <Grid>
-        <Button x:Name="bt_newGame" Content="Neues Spiel" HorizontalAlignment="Left" Margin="181,237,0,0" VerticalAlignment="Top" Width="75" Click="bt_newGame_Click"/>
-        <Button x:Name="bt_oldGame" Content="Spielstand laden" HorizontalAlignment="Left" Margin="50,237,0,0" VerticalAlignment="Top" Width="100" Click="bt_oldGame_Click"/>
-        <Button x:Name="bt_ChangeUser" Content="Benutzer Wechseln" HorizontalAlignment="Left" Margin="298,237,0,0" VerticalAlignment="Top" Width="120" Click="bt_ChangeUser_Click"/>
-        <Button x:Name="bt_Credits" Content="Credits" HorizontalAlignment="Right" Margin="0,237,126,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="bt_end" Content="Beenden" HorizontalAlignment="Left" Margin="696,237,0,0" VerticalAlignment="Top" Width="75" Click="bt_end_Click"/>
-        <Label x:Name="lb_User" Content="" HorizontalAlignment="Left" Margin="380,294,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_newName" HorizontalAlignment="Left" Height="23" Margin="314,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166"/>
-        <Label x:Name="lb_Name" Content="Neuer Name" HorizontalAlignment="Left" Margin="218,116,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bt_DeleteSave" Content="Spielstand Löschen" HorizontalAlignment="Left" Margin="450,237,0,0" VerticalAlignment="Top" Width="108" Click="bt_DeleteSave_Click"/>
+        <Button x:Name="bt_newGame" Content="Neues Spiel" HorizontalAlignment="Left" Margin="181,237,0,0" VerticalAlignment="Top" Width="75" Click="bt_newGame_Click" FontFamily="Microsoft Himalaya" FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="bt_oldGame" Content="Spielstand laden" HorizontalAlignment="Left" Margin="50,237,0,0" VerticalAlignment="Top" Width="100" Click="bt_oldGame_Click" FontFamily="Microsoft Himalaya" FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="bt_ChangeUser" Content="Benutzer Wechseln" HorizontalAlignment="Left" Margin="298,237,0,0" VerticalAlignment="Top" Width="120" Click="bt_ChangeUser_Click" FontFamily="Microsoft Himalaya" FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="bt_Credits" Content="Credits" HorizontalAlignment="Right" Margin="0,237,126,0" VerticalAlignment="Top" Width="75" FontSize="18" FontFamily="Microsoft Himalaya" Click="bt_Credits_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="bt_end" Content="Beenden" HorizontalAlignment="Left" Margin="696,237,0,0" VerticalAlignment="Top" Width="75" Click="bt_end_Click" FontSize="18" FontFamily="Microsoft Himalaya">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label x:Name="lb_User" Content="" HorizontalAlignment="Left" Margin="380,294,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Microsoft Himalaya"/>
+        <TextBox x:Name="txt_newName" HorizontalAlignment="Left" Height="23" Margin="314,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" FontFamily="Microsoft Himalaya" FontSize="20"/>
+        <Label x:Name="lb_Name" Content="Neuer Name" HorizontalAlignment="Left" Margin="215,120,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="20"/>
+        <Button x:Name="bt_DeleteSave" Content="Spielstand Löschen" HorizontalAlignment="Left" Margin="450,237,0,0" VerticalAlignment="Top" Width="108" Click="bt_DeleteSave_Click" FontSize="18" FontFamily="Microsoft Himalaya">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF0E956E" Offset="0"/>
+                    <GradientStop Color="#FF6464FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
