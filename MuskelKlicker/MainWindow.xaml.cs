@@ -164,7 +164,7 @@ namespace MuskelKlicker
                 points += clicker.PassiveClick;
                 lbl_Points.Content = points.ToString();
 
-                clicksPerSecond = 0;
+                //clicksPerSecond = 0;
                 lbl_Clicks.Content = clicksPerSecond.ToString();
 
 
@@ -198,6 +198,7 @@ namespace MuskelKlicker
                     clicker.ActiveClick += item.UpgradeA;
                     clicker.PassiveClick += item.UpgradeP;
                     lbl_Points.Content = points.ToString();
+                    item.Amount++;
                 }
                 else
                 {
