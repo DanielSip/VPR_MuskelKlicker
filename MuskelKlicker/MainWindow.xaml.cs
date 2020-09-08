@@ -85,6 +85,11 @@ namespace MuskelKlicker
                 lstbx_shopitems.Items.Add(items);
             }
             lbl_Points.Content = points.ToString();
+
+            foreach (PrestigeItem item in prestigeItems)
+            {
+                lstbx_shopitemsPrestige.Items.Add(item);
+            }
             #endregion
 
             #region Gespeicherten Fortschritt aufrufen
