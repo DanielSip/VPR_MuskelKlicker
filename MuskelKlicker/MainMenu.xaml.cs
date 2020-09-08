@@ -37,9 +37,13 @@ namespace MuskelKlicker
 
         private void bt_oldGame_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow game = new MainWindow(user);
-            Close();
-            game.Show();
+            if (user != "")
+            {
+                MainWindow game = new MainWindow(user);
+                Close();
+                game.Show();
+            }
+            
         }
 
         private void bt_newGame_Click(object sender, RoutedEventArgs e)
@@ -77,9 +81,16 @@ namespace MuskelKlicker
             }
             else
             {
-                user = spieler[0];
-                lb_User.Content = spieler[0];
-                pos = 0;
+                if (spieler.Count != 0)
+                {
+                    user = spieler[0];
+                    lb_User.Content = spieler[0];
+                    pos = 0;
+                }
+                else
+                {
+                    lb_User.Content = "";
+                }
             }
         }
 
@@ -89,12 +100,16 @@ namespace MuskelKlicker
 
             spieler = spielstand.GetUsers();
 
-            lb_User.Content = spieler[0];
-            pos = 0;
-            user = spieler[0];
+            if (spieler.Count != 0)
+            {
+                lb_User.Content = spieler[0];
+                pos = 0;
+                user = spieler[0];
 
-            lb_Name.Visibility = Visibility.Hidden;
-            txt_newName.Visibility = Visibility.Hidden;
+                lb_Name.Visibility = Visibility.Hidden;
+                txt_newName.Visibility = Visibility.Hidden;
+            }
+            
         }
 
         private void bt_DeleteSave_Click(object sender, RoutedEventArgs e)
@@ -104,9 +119,10 @@ namespace MuskelKlicker
 
             spieler.RemoveAt(pos);
 
-            MessageBox.Show("User " + user + "wurde gelöscht");
+            MessageBox.Show("User " + user + " wurde gelöscht");
 
             bt_ChangeUser_Click(sender, e);
+            user = "";
 
 
 

@@ -36,7 +36,7 @@ namespace MuskelKlicker
         List<ShopItem> ListItems = new List<ShopItem>();
         List<PrestigeItem> prestigeItems = new List<PrestigeItem>();
 
-        int points = 100;
+        int points = 10000000;
         int multiplyer = 1;
         int clicksPerSecond = 0;
 
@@ -56,17 +56,17 @@ namespace MuskelKlicker
             lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
 
             //Aktive Clicks
-            ShopItem hanteln = new ShopItem(10, "Hanteln", "Erhöht dein Klick um 1", 0, 1);
-            ShopItem gHanteln = new ShopItem(20, "Goldene-Hanteln", "Erhöht dein Klick um 2", 0, 2);
-            ShopItem protein = new ShopItem(200, "Protein", "Erhöht den Passive und Aktiven Klick um 10", 10, 10);
+            ShopItem hanteln = new ShopItem(10, "Hanteln", "Erhöht dein Klick um 1", 0, 1, 0);
+            ShopItem gHanteln = new ShopItem(20, "Goldene-Hanteln", "Erhöht dein Klick um 2", 0, 2, 0);
+            ShopItem protein = new ShopItem(200, "Protein", "Erhöht den Passive und Aktiven Klick um 10", 10, 10, 0);
 
             //Passive Clicks
-            ShopItem schlaf = new ShopItem(100, "Schlafen", "Erhöht den Passive um 10", 10, 0);
+            ShopItem schlaf = new ShopItem(100, "Schlafen", "Erhöht den Passive um 10", 10, 0, 0);
 
             //Prestige
             PrestigeItem gutesBett = new PrestigeItem(100000, "Gutes Bett", "Verringert die Kosten durch 2 von normalen Shop items", 2);
-            PrestigeItem guteHanteln = new PrestigeItem(100000, "Gute Hanteln", "Verringert die Kosten durch 3 von normalen Shop items", 3);
-            PrestigeItem perfekteHanteln = new PrestigeItem(100000, "Perfekte Hanteln", "Verringert die Kosten durch 4 von normalen Shop items", 4);
+            PrestigeItem guteHanteln = new PrestigeItem(400000, "Gute Hanteln", "Verringert die Kosten durch 3 von normalen Shop items", 3);
+            PrestigeItem perfekteHanteln = new PrestigeItem(800000, "Perfekte Hanteln", "Verringert die Kosten durch 4 von normalen Shop items", 4);
 
             //Add Items
             ListItems.Add(hanteln);
@@ -167,14 +167,14 @@ namespace MuskelKlicker
 
 
                 // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
-                if(rnd.Next(0,100) == 1)
+                if(rnd.Next(0,5) == 1)
                 {
                     bt_powerUP_spawn();
                 }
                 else
                 {
-                    bt_powerUP.IsEnabled = false;
-                    bt_powerUP.Visibility = Visibility.Hidden;
+                    //bt_powerUP.IsEnabled = false;
+                    //bt_powerUP.Visibility = Visibility.Hidden;
                 }
 
                 
@@ -195,7 +195,6 @@ namespace MuskelKlicker
                     item.Cost *= 2;
                     clicker.ActiveClick += item.UpgradeA;
                     clicker.PassiveClick += item.UpgradeP;
-                    MessageBox.Show(points.ToString());
                     lbl_Points.Content = points.ToString();
                 }
                 else
@@ -398,7 +397,10 @@ namespace MuskelKlicker
 
             bt_powerUP.IsEnabled = false;
             bt_powerUP.Visibility = Visibility.Hidden;
-            
+
+            lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
+            lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
+
         }
 
         private void powerUPeffect(int multiplier)
@@ -418,7 +420,15 @@ namespace MuskelKlicker
                     points -= item.Cost;
                     foreach (ShopItem shopitem in lstbx_shopitems.Items)
                     {
-                        shopitem.Cost /= item.Advantage;
+                        if (shopitem.Cost / item.Advantage == 0)
+                        {
+                            shopitem.Cost = 1;
+                        }
+                        else
+                        {
+                            shopitem.Cost /= item.Advantage;
+                        }
+                        
                     }
                     item.Cost *= 2;
                     lbl_Points.Content = points.ToString();
@@ -427,9 +437,11 @@ namespace MuskelKlicker
                 {
                     MessageBox.Show("Nicht genügend Geld");
                 }
-                lstbx_shopitemsPrestige.Items.Refresh();
+                
 
             }
+            lstbx_shopitems.Items.Refresh();
+            lstbx_shopitemsPrestige.Items.Refresh();
         }
     }
 }
