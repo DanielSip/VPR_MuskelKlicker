@@ -85,7 +85,6 @@
     </Compile>
     <Compile Include="PrestigeItem.cs" />
     <Compile Include="ShopItem.cs" />
-    <Compile Include="ShopItemsDB.cs" />
     <Compile Include="SpielstandDTB.cs" />
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
