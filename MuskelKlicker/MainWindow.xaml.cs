@@ -118,7 +118,7 @@ namespace MuskelKlicker
             {
                 //Übernimmt Punkte
                 points = countList[0];
-
+                lbl_Points.Content = points.ToString();
                 foreach (ShopItem sItem in ListItems)
                 {
                     
@@ -190,7 +190,7 @@ namespace MuskelKlicker
 
 
                 // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
-                if (rnd.Next(0, 5) == 1)
+                if (rnd.Next(0, 100) == 1)
                 {
                     bt_powerUP_spawn();
                 }
@@ -220,6 +220,7 @@ namespace MuskelKlicker
                     {
                         item.Cost *= 2;
                     }
+
                     clicker.ActiveClick += item.UpgradeA;
                     clicker.PassiveClick += item.UpgradeP;
                     lbl_Points.Content = points.ToString();
@@ -239,6 +240,7 @@ namespace MuskelKlicker
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            clicksPerSecond++;
             WriteToLabel();
 
             GetBonusPoints(20);
@@ -249,40 +251,40 @@ namespace MuskelKlicker
             //Button Aktive Click
             points += clicker.ActiveClick;
             lbl_Points.Content = points.ToString();
-
+            lbl_Clicks.Content = clicksPerSecond.ToString();
 
             // Clicks per Second
-            clicksPerSecond++;
-            lastClicks.Add(clicksPerSecond);
-            //ClicksPerSecond();
+            //clicksPerSecond++;
+            //lastClicks.Add(clicksPerSecond);
+            ////ClicksPerSecond();
         }
 
 
-        private void ClicksPerSecond()
-        {
-            if (lastClicks.Count >= 10)
-            {
-                lastClicks.RemoveAt(0);
-            }
+        //private void ClicksPerSecond()
+        //{
+        //    if (lastClicks.Count >= 10)
+        //    {
+        //        lastClicks.RemoveAt(0);
+        //    }
 
-            float avgCPS = 0;
-            int cpsSum = 0;
+        //    float avgCPS = 0;
+        //    int cpsSum = 0;
 
-            foreach (var number in lastClicks)
-            {
-                cpsSum += number;
-            }
+        //    foreach (var number in lastClicks)
+        //    {
+        //        cpsSum += number;
+        //    }
 
-            avgCPS = cpsSum / lastClicks.Count;
+        //    avgCPS = cpsSum / lastClicks.Count;
 
-            lbl_Clicks.Content = avgCPS;
-        }
+        //    lbl_Clicks.Content = avgCPS;
+        //}
 
         private void GetBonusPoints(int bonusPoints)
         {
-            if (Convert.ToInt32(lbl_Clicks.Content) >= 10)
+            if (Convert.ToInt32(lbl_Clicks.Content) >= 7)
             {
-                points += bonusPoints;
+                points += bonusPoints * 10;
             }
         }
 

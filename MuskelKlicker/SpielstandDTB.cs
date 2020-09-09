@@ -11,6 +11,7 @@ namespace MuskelKlicker
     public class SpielstandDTB
     {
         private OleDbConnection verbindung;
+        private int itemAddAmount = 0;
 
         public SpielstandDTB()
         {
@@ -27,9 +28,15 @@ namespace MuskelKlicker
 
             List<int> SpielerDaten = new List<int>();
 
+            for (int i = reader.FieldCount; i >= 5; i--)
+            {
+                    itemAddAmount++;
+            }
+            
+
             while (reader.Read())
             {               
-                for (int i = 1; i <= reader.FieldCount-2; i++)
+                for (int i = 1; i <= reader.FieldCount - itemAddAmount; i++)
                 {
                     SpielerDaten.Add(reader.GetInt32(i));
                 }

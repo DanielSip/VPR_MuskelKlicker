@@ -30,8 +30,8 @@
         </Button>
         <Label Content="Points:" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" Width="80" Grid.Column="2" Height="26" FontFamily="Microsoft Himalaya" FontSize="20"/>
         <Label x:Name="lbl_Points" Content="" HorizontalAlignment="Left" Margin="345,10,0,0" VerticalAlignment="Top" Width="99" Grid.Column="2" Height="26"/>
-        <Label x:Name="lab_ActiveClick" Content="Aktiver Klick" HorizontalAlignment="Left" Margin="281.2,157,0,0" VerticalAlignment="Top" Width="118" Grid.Column="2" Height="26" FontFamily="Microsoft Himalaya" FontSize="20"/>
-        <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="271.2,282,0,0" VerticalAlignment="Top" Width="134" Grid.Column="2" Height="26" FontFamily="Microsoft Himalaya" FontSize="20"/>
+        <Label x:Name="lab_ActiveClick" Content="Aktiver Klick" HorizontalAlignment="Left" Margin="281,157,0,0" VerticalAlignment="Top" Width="220" Grid.Column="2" Height="26" FontFamily="Microsoft Himalaya" FontSize="20"/>
+        <Label x:Name="lab_PassiveClick" Content="Passive Punkte" HorizontalAlignment="Left" Margin="271,282,0,0" VerticalAlignment="Top" Width="230" Grid.Column="2" Height="26" FontFamily="Microsoft Himalaya" FontSize="20"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="80" Margin="281,72,0,0" VerticalAlignment="Top" Width="80" Source="ActiveClickPic.png" Grid.Column="2"/>
         <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="80" Margin="271.2,197,0,0" VerticalAlignment="Top" Width="100" Source="PassiveClickPic.png" Grid.Column="2"/>
         <Label Content="Klicks:" HorizontalAlignment="Left" Margin="260,41,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.5,0.5" Grid.Column="2" Height="26" FontSize="20" FontFamily="Microsoft Himalaya"/>
