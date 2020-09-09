@@ -39,8 +39,9 @@ namespace MuskelKlicker
         int points = 100;
         int multiplyer = 1;
         int clicksPerSecond = 0;
+        int cpsLabel = 0;
+        DateTime lastValue;
         
-        List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -251,34 +252,27 @@ namespace MuskelKlicker
             //Button Aktive Click
             points += clicker.ActiveClick;
             lbl_Points.Content = points.ToString();
-            lbl_Clicks.Content = clicksPerSecond.ToString();
 
-            // Clicks per Second
-            //clicksPerSecond++;
-            //lastClicks.Add(clicksPerSecond);
-            ////ClicksPerSecond();
+
+
+            
+            int temp = clicksPerSecond;
+
+            //Wenn die aktuellen clicks das neue Maximum sind, cpsLabel auf das Maximum setzen
+            if (temp > cpsLabel)
+            {
+                cpsLabel = temp;
+                lastValue = DateTime.Now;
+            }
+            else if (DateTime.Now > lastValue.AddSeconds(1.3))  //Nach 1,3 Sekunden unabhängig vom Maximum, cpsLabel auf die Clicks setzen
+            {                                                       //Wird benötigt um die cps richtig auszugeben
+                cpsLabel = temp;
+                lastValue = DateTime.Now;
+            }
+
+            lbl_Clicks.Content = cpsLabel.ToString();
+
         }
-
-
-        //private void ClicksPerSecond()
-        //{
-        //    if (lastClicks.Count >= 10)
-        //    {
-        //        lastClicks.RemoveAt(0);
-        //    }
-
-        //    float avgCPS = 0;
-        //    int cpsSum = 0;
-
-        //    foreach (var number in lastClicks)
-        //    {
-        //        cpsSum += number;
-        //    }
-
-        //    avgCPS = cpsSum / lastClicks.Count;
-
-        //    lbl_Clicks.Content = avgCPS;
-        //}
 
         private void GetBonusPoints(int bonusPoints)
         {
