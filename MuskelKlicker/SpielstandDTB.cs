@@ -93,12 +93,10 @@ namespace MuskelKlicker
 
                 for (int i = 0; i < shopItems.Count; i++)
                 {
-
-                    cmd += shopItems[i].Name + ",";
-
+                    cmd += "[" + shopItems[i].Name + "],";
                 }
 
-                cmd += "Spielername) Values (" + scoreAnzahl + ",";
+                cmd += "[Spielername]) Values (" + scoreAnzahl + ",";
 
                 for (int i = 0; i < shopItems.Count; i++)
                 {

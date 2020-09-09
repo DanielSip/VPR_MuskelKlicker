@@ -190,7 +190,7 @@ namespace MuskelKlicker
 
 
                 // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
-                if (rnd.Next(0, 100) == 1)
+                if (rnd.Next(0, 2) == 1)
                 {
                     bt_powerUP_spawn();
                 }
@@ -301,8 +301,6 @@ namespace MuskelKlicker
             {
                 countList.Add((item as ShopItem).Amount);
             }
-
-
 
             spielstand.SaveSpielstand(points, countList, user);
             
