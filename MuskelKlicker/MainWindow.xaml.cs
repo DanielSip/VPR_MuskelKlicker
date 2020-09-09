@@ -92,9 +92,20 @@ namespace MuskelKlicker
 
             //Shop mit Items erstellen
             foreach (ShopItem items in ListItems)
-            {
+            {              
                 lstbx_shopitems.Items.Add(items);
+                lstbx_shopitems.Items.Refresh();
             }
+
+            for (int i = 1; i < countList.Count; i++)
+            {
+                for (int j = 0; j < countList[i]; j++)
+                {
+                    ListItems[i-1].Cost *= 2;
+                }
+                ListItems[i - 1].Amount = countList[i];
+            }
+
             lbl_Points.Content = points.ToString();
 
             foreach (PrestigeItem item in prestigeItems)
@@ -107,6 +118,13 @@ namespace MuskelKlicker
             {
                 //Übernimmt Punkte
                 points = countList[0];
+
+                foreach (ShopItem sItem in ListItems)
+                {
+                    
+                    clicker.ActiveClick += sItem.UpgradeA * sItem.Amount;
+                    clicker.PassiveClick += sItem.UpgradeP * sItem.Amount;
+                }
 
                 ////Übernimmt Hantel
                 //ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
@@ -160,33 +178,34 @@ namespace MuskelKlicker
 
             #region Timer (1 Sec)
 
-            ////Timer für jede Sekunde
-            //DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
-            //{
-            //    //this.dateText.Content = DateTime.Now.ToString("ss");
-            //    points += clicker.PassiveClick;
-            //    lbl_Points.Content = points.ToString();
+            //Timer für jede Sekunde
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                //this.dateText.Content = DateTime.Now.ToString("ss");
+                points += clicker.PassiveClick;
+                lbl_Points.Content = points.ToString();
 
-            //    //clicksPerSecond = 0;
-            //    lbl_Clicks.Content = clicksPerSecond.ToString();
+                clicksPerSecond = 0;
+                lbl_Clicks.Content = clicksPerSecond.ToString();
 
 
-            //    // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
-            //    if(rnd.Next(0,5) == 1)
-            //    {
-            //        bt_powerUP_spawn();
-            //    }
-            //    else
-            //    {
-            //        //bt_powerUP.IsEnabled = false;
-            //        //bt_powerUP.Visibility = Visibility.Hidden;
-            //    }
+                // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
+                if (rnd.Next(0, 5) == 1)
+                {
+                    bt_powerUP_spawn();
+                }
+                else
+                {
+                    //bt_powerUP.IsEnabled = false;
+                    //bt_powerUP.Visibility = Visibility.Hidden;
+                }
 
-                
-                
-            //}, this.Dispatcher);
+
+
+            }, this.Dispatcher);
             #endregion
         }
+
         private void lstbx_shopitems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lstbx_shopitems.SelectedItem != null)
@@ -197,11 +216,14 @@ namespace MuskelKlicker
                 if (item.Cost <= points)
                 {                        
                     points -= item.Cost;
-                    item.Cost *= 2;
+                    for (int i = 0; i < multiplyer; i++)
+                    {
+                        item.Cost *= 2;
+                    }
                     clicker.ActiveClick += item.UpgradeA;
                     clicker.PassiveClick += item.UpgradeP;
                     lbl_Points.Content = points.ToString();
-                    item.Amount++;
+                    item.Amount += multiplyer;
                 }
                 else
                 {
@@ -219,7 +241,7 @@ namespace MuskelKlicker
         {
             WriteToLabel();
 
-            //GetBonusPoints(20);
+            GetBonusPoints(20);
         }
 
         private void WriteToLabel()
@@ -260,7 +282,7 @@ namespace MuskelKlicker
         {
             if (Convert.ToInt32(lbl_Clicks.Content) >= 10)
             {
-                points *= bonusPoints;
+                points += bonusPoints;
             }
         }
 
@@ -322,8 +344,7 @@ namespace MuskelKlicker
             {
                 for (int i = 0; i < multiplyer; i++)
                 {
-                    item.Cost *= 2;
-                    
+                    item.Cost *= 2;               
                 }
 
                 item.UpgradeA *= multiplyer;

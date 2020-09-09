@@ -8,14 +8,14 @@ using Microsoft.SqlServer.Server;
 
 namespace MuskelKlicker
 {
-    class SpielstandDTB
+    public class SpielstandDTB
     {
         private OleDbConnection verbindung;
 
         public SpielstandDTB()
         {
             verbindung = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;" +
-                                             @"Data Source=../../../Datenbanken.accdb");
+                                             @"Data Source=../../../../Datenbanken.accdb");
             verbindung.Open();
         }
 
@@ -29,7 +29,7 @@ namespace MuskelKlicker
 
             while (reader.Read())
             {               
-                for (int i = 1; i <= 5; i++)
+                for (int i = 1; i <= reader.FieldCount-2; i++)
                 {
                     SpielerDaten.Add(reader.GetInt32(i));
                 }
@@ -117,11 +117,11 @@ namespace MuskelKlicker
                 {
                     if (i < shopItems.Count - 1)
                     {
-                        cmd += shopItems[i].Name + "=" + anzahlenItems[i] + ",";
+                        cmd += "["+shopItems[i].Name + "]=" + anzahlenItems[i] + ",";
                     }
                     else
                     {
-                        cmd += shopItems[i].Name + "=" + anzahlenItems[i] + " Where Spielername = '" + user +"'";
+                        cmd += "[" +shopItems[i].Name + "]=" + anzahlenItems[i] + " Where Spielername = '" + user +"'";
                     }
                 }
             }
@@ -153,6 +153,44 @@ namespace MuskelKlicker
             } 
 
             return true;
+        }
+
+        public Boolean AddItem(int cost, string name, string description, int passive, int active)
+        {
+            OleDbCommand kommando = new OleDbCommand("SELECT id FROM Itemdatenbank Where itemname = '" + name + "'", verbindung);
+
+            OleDbDataReader reader = kommando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return false;
+            }
+            reader.Close();
+
+            kommando = new OleDbCommand($"INSERT INTO itemdatenbank (Kosten, Itemname, Beschreibung, UpgradeP, UpgradeA) " +
+                                                     $"VALUES ('{cost}', '{name}', '{description}', '{passive}', '{active}')", verbindung);
+            kommando.ExecuteNonQuery();
+
+            kommando = new OleDbCommand("ALTER TABLE Spielstand ADD " + name + " int ",verbindung);
+
+            kommando.ExecuteNonQuery();
+
+            kommando = new OleDbCommand("UPDATE Spielstand Set " + name + " = 0",verbindung);
+
+            kommando.ExecuteNonQuery();
+
+            return true;
+        }
+
+        public void DeleteItem(string name)
+        {
+            OleDbCommand kommando = new OleDbCommand("DELETE from itemdatenbank WHERE itemname = '" + name + "'",
+                                                     verbindung);
+            kommando.ExecuteNonQuery();
+
+            kommando = new OleDbCommand("ALTER TABLE Spielstand DROP COLUMN "+ name, verbindung);
+
+            kommando.ExecuteNonQuery();
         }
     }
 }

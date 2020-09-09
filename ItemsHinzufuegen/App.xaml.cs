@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ItemHinzufügen
+namespace ItemsHinzufuegen
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaktionslogik für "App.xaml"
     /// </summary>
     public partial class App : Application
     {
