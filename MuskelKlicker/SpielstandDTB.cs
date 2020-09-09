@@ -10,6 +10,8 @@ namespace MuskelKlicker
 {
     public class SpielstandDTB
     {
+        //Daniel Sippel
+
         private OleDbConnection verbindung;
         private int itemAddAmount = 0;
 

@@ -19,6 +19,8 @@ namespace ItemsHinzufuegen
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
+    /// 
+    //Daniel Sippel
     public partial class MainWindow : Window
     {
         public MainWindow()

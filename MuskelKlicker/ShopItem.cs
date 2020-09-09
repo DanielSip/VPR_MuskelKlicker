@@ -8,6 +8,7 @@ namespace MuskelKlicker
 {
     public class ShopItem
     {
+        //Andrew John Lariat
         private int cost;
         private string name;
         private string description;

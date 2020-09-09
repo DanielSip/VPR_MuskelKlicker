@@ -8,6 +8,7 @@ namespace MuskelKlicker
 {
     class Clicker
     {
+        //Andrew John Lariat
         private int passiveClick;
         private int activeClick;
 
