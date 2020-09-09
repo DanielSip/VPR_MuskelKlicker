@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MuskelKlicker
 {
-    class ShopItem
+    public class ShopItem
     {
         private int cost;
         private string name;

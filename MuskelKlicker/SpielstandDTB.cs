@@ -38,6 +38,21 @@ namespace MuskelKlicker
                 
         }
 
+        public List<ShopItem> GetShopItems()
+        {
+            List<ShopItem> itemListe = new List<ShopItem>();
+
+            OleDbCommand kommando = new OleDbCommand("SELECT * FROM Itemdatenbank", verbindung);
+            OleDbDataReader reader = kommando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                itemListe.Add(new ShopItem(reader.GetInt32(1),reader.GetString(2),reader.GetString(3),reader.GetInt32(4),reader.GetInt32(5),0));
+            }
+
+            return itemListe;
+        }
+
         public List<string> GetUsers()
         {
             List<string> spielerListe = new List<string>();
@@ -53,26 +68,64 @@ namespace MuskelKlicker
             return spielerListe;
         }
 
-        public void SaveSpielstand(int scoreAnzahl, int hantelAnzahl, int goldeneHantelnAnzahl, int proteinAnzahl, int schlafAnzahl, string user)
+        //public void SaveSpielstand(int scoreAnzahl, int hantelAnzahl, int goldeneHantelnAnzahl, int proteinAnzahl, int schlafAnzahl, string user)
+        public void SaveSpielstand(int scoreAnzahl, List<int> anzahlenItems, string user)
         {
-
+            List<ShopItem> shopItems = new List<ShopItem>();
+            shopItems = GetShopItems();
             
 
             OleDbCommand kommando = new OleDbCommand("SELECT id FROM Spielstand Where Spielername = '"+ user +"'", verbindung);
             OleDbDataReader reader = kommando.ExecuteReader();
 
+            string cmd;
+
             if (!reader.HasRows)
             {
-                kommando = new OleDbCommand($"INSERT INTO Spielstand (Score, Hanteln, GoldeneHanteln, Protein, Schlafen, Spielername) " +
-                                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}', '{user}')",
-                                                         verbindung);
+                cmd = "INSERT INTO Spielstand ( Score,";
+
+                for (int i = 0; i < shopItems.Count; i++)
+                {
+
+                    cmd += shopItems[i].Name + ",";
+
+                }
+
+                cmd += "Spielername) Values (" + scoreAnzahl + ",";
+
+                for (int i = 0; i < shopItems.Count; i++)
+                {
+
+                    cmd += anzahlenItems[i] + ", ";
+
+                       
+                }
+                cmd += "'" + user + "')";
+
+                //kommando = new OleDbCommand($"INSERT INTO Spielstand (Score, Hanteln, GoldeneHanteln, Protein, Schlafen, Spielername) " +
+                //                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}', '{user}')",
+                //                                         verbindung);
             }
             else
             {
-                kommando = new OleDbCommand($"UPDATE Spielstand Set Score = '{scoreAnzahl}', Hanteln ={hantelAnzahl}, GoldeneHanteln ={goldeneHantelnAnzahl}, Protein={proteinAnzahl}, Schlafen={schlafAnzahl} Where Spielername = '" + user + "'",
-                                                                     verbindung);
+                //kommando = new OleDbCommand($"UPDATE Spielstand Set Score = '{scoreAnzahl}', Hanteln ={hantelAnzahl}, GoldeneHanteln ={goldeneHantelnAnzahl}, Protein={proteinAnzahl}, Schlafen={schlafAnzahl} Where Spielername = '" + user + "'",
+                //                                                     verbindung);
+
+                cmd = "UPDATE Spielstand Set Score = "+ scoreAnzahl +",";
+
+                for (int i = 0; i < shopItems.Count; i++)
+                {
+                    if (i < shopItems.Count - 1)
+                    {
+                        cmd += shopItems[i].Name + "=" + anzahlenItems[i] + ",";
+                    }
+                    else
+                    {
+                        cmd += shopItems[i].Name + "=" + anzahlenItems[i] + " Where Spielername = '" + user +"'";
+                    }
+                }
             }
-          
+            kommando = new OleDbCommand(cmd,verbindung);
             kommando.ExecuteNonQuery();
             verbindung.Close();
         }

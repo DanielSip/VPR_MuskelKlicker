@@ -12,19 +12,21 @@ namespace MuskelKlicker
         private string name;
         private string description;
         private int advantage;
+        private int amount;
 
         public int Cost { get => cost; set => cost = value; }
         public string Name { get => name; set => name = value; }
         public string Description { get => description; set => description = value; }
         public int Advantage { get => advantage; set => advantage = value; }
+        public int Amount { get => amount; set => amount = value; }
 
-        public PrestigeItem(int cost, string name, string description, int advantage)
+        public PrestigeItem(int cost, string name, string description, int advantage, int amount)
         {
             Cost = cost;
             Name = name;
             Description = description;
             Advantage = advantage;
-
+            Amount = amount;
         }
 
         public override string ToString()
