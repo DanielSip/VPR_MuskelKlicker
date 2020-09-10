@@ -252,6 +252,9 @@ namespace MuskelKlicker
         #endregion
 
         #region In Label schreiben | Andrew John Lariat
+        /// <summary>
+        /// Schreibt die Punkte und die Klicks pro Sekunde in das Label
+        /// </summary>
         private void WriteToLabel()
         {
             //Button Aktive Click
@@ -287,6 +290,10 @@ namespace MuskelKlicker
         //}
 
         #region Points bei genügend Klicks | Andrew John Lariat
+        /// <summary>
+        /// Fügt Punkte bonuspunkte bei genügend Klicks (7 Klicks pro Sekunde) hinzu
+        /// </summary>
+        /// <param name="bonusPoints">Die Bonuspunkte werden mal 10 genommen und auf den Normalen Punkten hinzugefügt</param>
         private void GetBonusPoints(int bonusPoints)
         {
             if (Convert.ToInt32(lbl_Clicks.Content) >= 7)
@@ -320,6 +327,9 @@ namespace MuskelKlicker
         #endregion
 
         #region Multiplikator für Items | Andrew John Lariat
+        /// <summary>
+        /// Kauft das Shopitem 10 mal
+        /// </summary>
         private void bt_ten_Click(object sender, RoutedEventArgs e)
         {
             multiplyer = 10;
@@ -329,7 +339,9 @@ namespace MuskelKlicker
             bt_five.IsEnabled = false;
             bt_one.IsEnabled = true;
         }
-
+        /// <summary>
+        /// Kauft das Shopitem 5 mal
+        /// </summary>
         private void bt_five_Click(object sender, RoutedEventArgs e)
         {
             multiplyer = 5;
@@ -339,7 +351,9 @@ namespace MuskelKlicker
             bt_five.IsEnabled = false;
             bt_one.IsEnabled = true;
         }
-
+        /// <summary>
+        /// Kauft das Shopitem 1 mal
+        /// </summary>
         private void bt_one_Click(object sender, RoutedEventArgs e)
         {
 
@@ -351,6 +365,9 @@ namespace MuskelKlicker
             bt_one.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Erhöht die Kosten, sodass man Shopitems kauft basierend auf den Multiplyer
+        /// </summary>
         private void MultiplyItemCost()
         {
             foreach (ShopItem item in ListItems)
@@ -366,7 +383,9 @@ namespace MuskelKlicker
             
             lstbx_shopitems.Items.Refresh();
         }
-
+        /// <summary>
+        /// Verringert die Kosten, sodass man die standart Kosten bezahlen muss
+        /// </summary>
         private void ReduceItemCost()
         {
             foreach (ShopItem item in ListItems)
@@ -441,6 +460,9 @@ namespace MuskelKlicker
         #endregion
 
         #region PrestigeItems | Andrew John Lariat
+        /// <summary>
+        /// Kauft Shopitems und verringert die Punkte bei ein erfolgreichen Kauf
+        /// </summary>
         private void lstbx_shopitemsPrestige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lstbx_shopitemsPrestige.SelectedItem != null)
