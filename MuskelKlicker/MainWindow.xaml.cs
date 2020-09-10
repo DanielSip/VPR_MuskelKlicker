@@ -45,14 +45,6 @@ namespace MuskelKlicker
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //ToDo: -Klicks per sec             Done: Andrew John / Dennis
-            //      -Reset von klicks per sec   Done: Andrew John / Dennis
-            //      -Klickbonus                 Done: Andrew John
-            //      -Grafiken einfügen          Done: Andrew John
-            //      -Shopitems aus der DB       
-            //      -Fortschritt speichern      fehlt Prestige
-            //      -Fortschritt aufrufen       fehlt Prestige
-
             #region Shop und Item Update | Andrew John Lariat
             //Items | Clicker
             lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
@@ -83,7 +75,7 @@ namespace MuskelKlicker
             prestigeItems.Add(guteHanteln);
             prestigeItems.Add(perfekteHanteln);
 
-            #region Gespeicherten Fortschritt aufrufen
+            #region Gespeicherten Fortschritt aufrufen | Daniel Sippel
             SpielstandDTB spielstand = new SpielstandDTB();
 
             List<int> countList = new List<int>();
@@ -176,7 +168,6 @@ namespace MuskelKlicker
 
             #endregion
 
-
             #region Timer (1 Sec) | Andrew John Lariat / Dennis Martens
 
             //Timer für jede Sekunde
@@ -208,6 +199,9 @@ namespace MuskelKlicker
         }
 
         #region ShopItem kauf Andrew John Lariat
+        /// <summary>
+        /// Kauft ShopItems und verringert die Punkte bei ein erfolgreichen Kauf
+        /// </summary>
         private void lstbx_shopitems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lstbx_shopitems.SelectedItem != null)
@@ -268,26 +262,6 @@ namespace MuskelKlicker
             ////ClicksPerSecond();
         }
         #endregion
-
-        //private void ClicksPerSecond()
-        //{
-        //    if (lastClicks.Count >= 10)
-        //    {
-        //        lastClicks.RemoveAt(0);
-        //    }
-
-        //    float avgCPS = 0;
-        //    int cpsSum = 0;
-
-        //    foreach (var number in lastClicks)
-        //    {
-        //        cpsSum += number;
-        //    }
-
-        //    avgCPS = cpsSum / lastClicks.Count;
-
-        //    lbl_Clicks.Content = avgCPS;
-        //}
 
         #region Points bei genügend Klicks | Andrew John Lariat
         /// <summary>
@@ -461,7 +435,7 @@ namespace MuskelKlicker
 
         #region PrestigeItems | Andrew John Lariat
         /// <summary>
-        /// Kauft Shopitems und verringert die Punkte bei ein erfolgreichen Kauf
+        /// Kauft PrestigeItems und verringert die Punkte bei ein erfolgreichen Kauf
         /// </summary>
         private void lstbx_shopitemsPrestige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
