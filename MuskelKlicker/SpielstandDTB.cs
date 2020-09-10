@@ -165,6 +165,7 @@ namespace MuskelKlicker
         }
 
         /// <summary>
+        /// Daniel Sippel
         /// Uberprüft ob das Profil existiert
         /// </summary>
         /// <param name="user"></param>
@@ -183,6 +184,7 @@ namespace MuskelKlicker
         }
 
         /// <summary>
+        /// Daniel Sippel
         /// Fügt das Item der itemdatenbank hinzu und added dann eine Spalte mit dem itemname der Spielstand Datenbank hinzu
         /// </summary>
         /// <param name="cost">Die Kosten des Items</param>
@@ -219,6 +221,7 @@ namespace MuskelKlicker
         }
 
         /// <summary>
+        /// Daniel Sippel
         /// Entfernt das Item aus der itemdatenbank und entfern die extra Spalte aus dem Spielstand
         /// </summary>
         /// <param name="name">der Name des Items das Gelöscht werden soll</param>

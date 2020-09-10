@@ -17,7 +17,7 @@ using System.Timers;
 
 namespace MuskelKlicker
 {
-    /// <s0000000ummary>
+    /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
@@ -42,6 +42,7 @@ namespace MuskelKlicker
         int clicksPerSecond = 0;
         
         List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -119,45 +120,7 @@ namespace MuskelKlicker
                     clicker.PassiveClick += sItem.UpgradeP * sItem.Amount;
                 }
 
-                ////Übernimmt Hantel
-                //ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
-                //for (int i = 0; i < countList[1]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Goldene Hanteln
-                //item = (ShopItem)lstbx_shopitems.Items[1];
-                //for (int i = 0; i < countList[2]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Protein
-                //item = (ShopItem)lstbx_shopitems.Items[2];
-                //for (int i = 0; i < countList[3]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Schlaf
-                //item = (ShopItem)lstbx_shopitems.Items[3];
-                //for (int i = 0; i < countList[4]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
+                
 
                 //zeigt alles nochmal richtig an
                 lstbx_shopitems.Items.Refresh();
@@ -278,6 +241,11 @@ namespace MuskelKlicker
         #endregion
 
         #region Speicherung des Profils | Daniel Sippel
+        /// <summary>
+        /// Daten von den Items in die Liste hinzufügen und dann Speichern
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {   
             SpielstandDTB spielstand = new SpielstandDTB();

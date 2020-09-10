@@ -28,6 +28,12 @@ namespace ItemsHinzufuegen
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Refresht alle Items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ItemlistRefresh();
@@ -107,7 +113,7 @@ namespace ItemsHinzufuegen
 
         /// <summary>
         /// Daniel Sippel
-        /// Leert die Listbox und fügt dann alle datensätze aus der Datenbank in die Listbox
+        /// Leert die Listbox und fügt dann alle Datensätze aus der Datenbank in die Listbox
         /// </summary>
         private void ItemlistRefresh()
         {
