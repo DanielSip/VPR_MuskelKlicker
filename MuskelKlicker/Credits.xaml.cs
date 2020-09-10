@@ -24,6 +24,12 @@ namespace MuskelKlicker
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Öffnet das Main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_menu_Click(object sender, RoutedEventArgs e)
         {
             MainMenu menu = new MainMenu();
