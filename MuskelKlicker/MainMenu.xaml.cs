@@ -67,20 +67,25 @@ namespace MuskelKlicker
 
             if (txt_newName.Text != "")
             {
-                
-                
-                if (!spielstand.UserExists(txt_newName.Text))
+                if (txt_newName.Text.Length <= 30)
                 {
-                    user = txt_newName.Text;
-                    MainWindow game = new MainWindow(user);
-                    Close();
-                    game.Show();
+                    if (!spielstand.UserExists(txt_newName.Text))
+                    {
+                        user = txt_newName.Text;
+                        MainWindow game = new MainWindow(user);
+                        Close();
+                        game.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Benutzer gibt es Bereits");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Benutzer gibt es Bereits");
+                    MessageBox.Show("Nicht mehr als 30 Zeichen");
                 }
-            }          
+            }
                        
         }
 

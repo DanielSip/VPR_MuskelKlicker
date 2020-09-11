@@ -69,7 +69,6 @@ namespace ItemsHinzufuegen
                             txB_Active.Text = "";
                             txB_Passive.Text = "";
                             ItemlistRefresh();
-
                         }
                         else
                         {
