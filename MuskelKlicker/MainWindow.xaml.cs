@@ -49,6 +49,7 @@ namespace MuskelKlicker
         List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
 
 
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             #region Shop und Item Update | Andrew John Lariat
@@ -215,9 +216,11 @@ namespace MuskelKlicker
         }
         #endregion
 
-        #region In Label schreiben | Andrew John Lariat
+        #region Write To Labels
         /// <summary>
-        /// Schreibt die Punkte und die Klicks pro Sekunde in das Label
+        /// Methode die die Punkte ausgibt und die Klick/Sekunde angibt
+        /// 
+        /// ~ Lars Stuhlmacher und Andrew John Lariat
         /// </summary>
         private void WriteToLabel()
         {
@@ -226,12 +229,27 @@ namespace MuskelKlicker
             lbl_Points.Content = points.ToString();
             lbl_Clicks.Content = clicksPerSecond.ToString();
 
-            // Clicks per Second
-            //clicksPerSecond++;
-            //lastClicks.Add(clicksPerSecond);
-            ////ClicksPerSecond();
+
+
+            
+            int temp = clicksPerSecond;
+
+            //Wenn die aktuellen clicks das neue Maximum sind, cpsLabel auf das Maximum setzen
+            if (temp > cpsLabel)
+            {
+                cpsLabel = temp;
+                lastValue = DateTime.Now;
+            }
+            else if (DateTime.Now > lastValue.AddSeconds(1.3))  //Nach 1,3 Sekunden unabhängig vom Maximum, cpsLabel auf die Clicks setzen
+            {                                                       //Wird benötigt um die cps richtig auszugeben
+                cpsLabel = temp;
+                lastValue = DateTime.Now;
+            }
+
+            lbl_Clicks.Content = cpsLabel.ToString();
+
         }
-        #endregion
+#endregion
 
         #region Points bei genügend Klicks | Andrew John Lariat
         /// <summary>
@@ -383,7 +401,6 @@ namespace MuskelKlicker
             //Zufallskoordinaten für den PowerUP-Button
             double rndWidth = rnd.Next(50, (int)width - 50);
             double rndHeight = rnd.Next(50, (int)height - 50);
-
 
             bt_powerUP.Margin = new Thickness(rndWidth, rndHeight, 0, 0);
         }
