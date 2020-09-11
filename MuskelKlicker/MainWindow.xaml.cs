@@ -40,8 +40,10 @@ namespace MuskelKlicker
         int points = 100;
         int multiplyer = 1;
         int clicksPerSecond = 0;
-        
-        List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
+        int cpsLabel = 0;
+        DateTime lastValue;
+
+
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -209,7 +211,7 @@ namespace MuskelKlicker
         }
         #endregion
 
-
+        #region Write To Labels
         /// <summary>
         /// Methode die die Punkte ausgibt und die Klick/Sekunde angibt
         /// 
@@ -242,7 +244,7 @@ namespace MuskelKlicker
             lbl_Clicks.Content = cpsLabel.ToString();
 
         }
-        #endregion
+#endregion
 
         #region Points bei genügend Klicks | Andrew John Lariat
         /// <summary>
