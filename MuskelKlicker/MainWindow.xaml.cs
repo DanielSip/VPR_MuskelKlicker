@@ -17,11 +17,12 @@ using System.Timers;
 
 namespace MuskelKlicker
 {
-    /// <s0000000ummary>
+    /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         string user;
 
         public MainWindow(string user)
@@ -39,21 +40,13 @@ namespace MuskelKlicker
         int points = 100;
         int multiplyer = 1;
         int clicksPerSecond = 0;
-        int cpsLabel = 0;
-        DateTime lastValue;
         
+        List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //ToDo: -Klicks per sec             Done: Andrew John / Dennis
-            //      -Reset von klicks per sec   Done: Andrew John / Dennis
-            //      -Klickbonus                 Done: Andrew John
-            //      -Grafiken einfügen          Done: Andrew John
-            //      -Shopitems aus der DB       
-            //      -Fortschritt speichern      fehlt Prestige
-            //      -Fortschritt aufrufen       fehlt Prestige
-
-            #region Shop und Item Update
+            #region Shop und Item Update | Andrew John Lariat
             //Items | Clicker
             lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
             lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
@@ -83,7 +76,7 @@ namespace MuskelKlicker
             prestigeItems.Add(guteHanteln);
             prestigeItems.Add(perfekteHanteln);
 
-            #region Gespeicherten Fortschritt aufrufen
+            #region Gespeicherten Fortschritt aufrufen | Daniel Sippel
             SpielstandDTB spielstand = new SpielstandDTB();
 
             List<int> countList = new List<int>();
@@ -127,45 +120,7 @@ namespace MuskelKlicker
                     clicker.PassiveClick += sItem.UpgradeP * sItem.Amount;
                 }
 
-                ////Übernimmt Hantel
-                //ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
-                //for (int i = 0; i < countList[1]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Goldene Hanteln
-                //item = (ShopItem)lstbx_shopitems.Items[1];
-                //for (int i = 0; i < countList[2]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Protein
-                //item = (ShopItem)lstbx_shopitems.Items[2];
-                //for (int i = 0; i < countList[3]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Schlaf
-                //item = (ShopItem)lstbx_shopitems.Items[3];
-                //for (int i = 0; i < countList[4]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
+                
 
                 //zeigt alles nochmal richtig an
                 lstbx_shopitems.Items.Refresh();
@@ -176,8 +131,7 @@ namespace MuskelKlicker
 
             #endregion
 
-
-            #region Timer (1 Sec)
+            #region Timer (1 Sec) | Andrew John Lariat / Dennis Martens
 
             //Timer für jede Sekunde
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
@@ -186,12 +140,13 @@ namespace MuskelKlicker
                 points += clicker.PassiveClick;
                 lbl_Points.Content = points.ToString();
 
+                //Klicks pro Sekunde sind zu beginn auf 0 gesetzt. Kann mit Upgrades erhöht werden.
                 clicksPerSecond = 0;
                 lbl_Clicks.Content = clicksPerSecond.ToString();
 
 
                 // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
-                if (rnd.Next(0, 100) == 1)
+                if (rnd.Next(0, 2) == 1)
                 {
                     bt_powerUP_spawn();
                 }
@@ -207,6 +162,10 @@ namespace MuskelKlicker
             #endregion
         }
 
+        #region ShopItem kauf Andrew John Lariat
+        /// <summary>
+        /// Kauft ShopItems und verringert die Punkte bei ein erfolgreichen Kauf
+        /// </summary>
         private void lstbx_shopitems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lstbx_shopitems.SelectedItem != null)
@@ -238,7 +197,9 @@ namespace MuskelKlicker
                 lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
             }
         }
+        #endregion
 
+        #region Mainbutton Points adden | Andrew John Lariat
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             clicksPerSecond++;
@@ -246,6 +207,7 @@ namespace MuskelKlicker
 
             GetBonusPoints(20);
         }
+        #endregion
 
 
         /// <summary>
@@ -258,6 +220,7 @@ namespace MuskelKlicker
             //Button Aktive Click
             points += clicker.ActiveClick;
             lbl_Points.Content = points.ToString();
+            lbl_Clicks.Content = clicksPerSecond.ToString();
 
 
 
@@ -279,7 +242,13 @@ namespace MuskelKlicker
             lbl_Clicks.Content = cpsLabel.ToString();
 
         }
+        #endregion
 
+        #region Points bei genügend Klicks | Andrew John Lariat
+        /// <summary>
+        /// Fügt Punkte bonuspunkte bei genügend Klicks (7 Klicks pro Sekunde) hinzu
+        /// </summary>
+        /// <param name="bonusPoints">Die Bonuspunkte werden mal 10 genommen und auf den Normalen Punkten hinzugefügt</param>
         private void GetBonusPoints(int bonusPoints)
         {
             if (Convert.ToInt32(lbl_Clicks.Content) >= 7)
@@ -287,7 +256,14 @@ namespace MuskelKlicker
                 points += bonusPoints * 10;
             }
         }
+        #endregion
 
+        #region Speicherung des Profils | Daniel Sippel
+        /// <summary>
+        /// Daten von den Items in die Liste hinzufügen und dann Speichern
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {   
             SpielstandDTB spielstand = new SpielstandDTB();
@@ -308,7 +284,12 @@ namespace MuskelKlicker
             
             Close();
         }
+        #endregion
 
+        #region Multiplikator für Items | Andrew John Lariat
+        /// <summary>
+        /// Kauft das Shopitem 10 mal
+        /// </summary>
         private void bt_ten_Click(object sender, RoutedEventArgs e)
         {
             multiplyer = 10;
@@ -318,7 +299,9 @@ namespace MuskelKlicker
             bt_five.IsEnabled = false;
             bt_one.IsEnabled = true;
         }
-
+        /// <summary>
+        /// Kauft das Shopitem 5 mal
+        /// </summary>
         private void bt_five_Click(object sender, RoutedEventArgs e)
         {
             multiplyer = 5;
@@ -328,7 +311,9 @@ namespace MuskelKlicker
             bt_five.IsEnabled = false;
             bt_one.IsEnabled = true;
         }
-
+        /// <summary>
+        /// Kauft das Shopitem 1 mal
+        /// </summary>
         private void bt_one_Click(object sender, RoutedEventArgs e)
         {
 
@@ -340,6 +325,9 @@ namespace MuskelKlicker
             bt_one.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Erhöht die Kosten, sodass man Shopitems kauft basierend auf den Multiplyer
+        /// </summary>
         private void MultiplyItemCost()
         {
             foreach (ShopItem item in ListItems)
@@ -355,7 +343,9 @@ namespace MuskelKlicker
             
             lstbx_shopitems.Items.Refresh();
         }
-
+        /// <summary>
+        /// Verringert die Kosten, sodass man die standart Kosten bezahlen muss
+        /// </summary>
         private void ReduceItemCost()
         {
             foreach (ShopItem item in ListItems)
@@ -370,8 +360,12 @@ namespace MuskelKlicker
             }
             lstbx_shopitems.Items.Refresh();
         }
+        #endregion
 
-        //Dennis Martens
+        #region Power Up | Dennis Martens
+        /// <summary>
+        /// Steuert das erscheinen des PowerUp Buttons
+        /// </summary>
         private void bt_powerUP_spawn()
         {
             int duration = 5;
@@ -404,6 +398,9 @@ namespace MuskelKlicker
             bt_powerUP.Margin = new Thickness(rndWidth, rndHeight, 0, 0);
         }
 
+        /// <summary>
+        /// Nach dem Klicken des PowerUp Buttons werden die aktiven Klicks für 30 Sekunden verzehnfacht 
+        /// </summary>
         private void bt_powerUP_Click(object sender, RoutedEventArgs e)
         {
             powerUPeffect(10);
@@ -421,12 +418,19 @@ namespace MuskelKlicker
             lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
 
         }
-
+        /// <summary>
+        /// Verzehnfacht die aktiven Klicks
+        /// </summary>
         private void powerUPeffect(int multiplier)
         {
             clicker.ActiveClick *= multiplier;
         }
+        #endregion
 
+        #region PrestigeItems | Andrew John Lariat
+        /// <summary>
+        /// Kauft PrestigeItems und verringert die Punkte bei ein erfolgreichen Kauf
+        /// </summary>
         private void lstbx_shopitemsPrestige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lstbx_shopitemsPrestige.SelectedItem != null)
@@ -462,5 +466,6 @@ namespace MuskelKlicker
             lstbx_shopitems.Items.Refresh();
             lstbx_shopitemsPrestige.Items.Refresh();
         }
+        #endregion
     }
 }
