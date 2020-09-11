@@ -46,7 +46,8 @@ namespace MuskelKlicker
         DateTime poweredTime = new DateTime();
         int clicksToLower = 0;
 
-        List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
+        int cpsLabel = 0;
+        DateTime lastValue;
 
 
 
