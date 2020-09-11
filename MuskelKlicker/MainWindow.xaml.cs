@@ -140,6 +140,7 @@ namespace MuskelKlicker
                 points += clicker.PassiveClick;
                 lbl_Points.Content = points.ToString();
 
+                //Klicks pro Sekunde sind zu beginn auf 0 gesetzt. Kann mit Upgrades erhöht werden.
                 clicksPerSecond = 0;
                 lbl_Clicks.Content = clicksPerSecond.ToString();
 
@@ -345,6 +346,9 @@ namespace MuskelKlicker
         #endregion
 
         #region Power Up | Dennis Martens
+        /// <summary>
+        /// Steuert das erscheinen des PowerUp Buttons
+        /// </summary>
         private void bt_powerUP_spawn()
         {
             int duration = 5;
@@ -374,9 +378,13 @@ namespace MuskelKlicker
             double rndWidth = rnd.Next(50, (int)width - 50);
             double rndHeight = rnd.Next(50, (int)height - 50);
 
+
             bt_powerUP.Margin = new Thickness(rndWidth, rndHeight, 0, 0);
         }
 
+        /// <summary>
+        /// Nach dem Klicken des PowerUp Buttons werden die aktiven Klicks für 30 Sekunden verzehnfacht 
+        /// </summary>
         private void bt_powerUP_Click(object sender, RoutedEventArgs e)
         {
             powerUPeffect(10);
@@ -394,7 +402,9 @@ namespace MuskelKlicker
             lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
 
         }
-
+        /// <summary>
+        /// Verzehnfacht die aktiven Klicks
+        /// </summary>
         private void powerUPeffect(int multiplier)
         {
             clicker.ActiveClick *= multiplier;
