@@ -23,7 +23,7 @@
         </Button>
         <Label Content="Andrew John Lariat" HorizontalAlignment="Left" Margin="326,126,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
         <Label Content="Daniel Sippel" HorizontalAlignment="Left" Margin="350,170,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
-        <Label Content="Dennis Mertens" HorizontalAlignment="Left" Margin="340,220,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
+        <Label Content="Dennis Martens" HorizontalAlignment="Left" Margin="340,220,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
         <Label Content="Lars Meykel Stuhlmacher" HorizontalAlignment="Left" Margin="308,271,0,0" VerticalAlignment="Top" FontFamily="Microsoft Himalaya" FontSize="24"/>
         <Label Content="MuskelKlicker" HorizontalAlignment="Left" Margin="305,22,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Microsoft Himalaya"/>
 

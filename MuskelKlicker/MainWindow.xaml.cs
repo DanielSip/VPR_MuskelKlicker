@@ -17,7 +17,7 @@ using System.Timers;
 
 namespace MuskelKlicker
 {
-    /// <s0000000ummary>
+    /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
@@ -40,8 +40,15 @@ namespace MuskelKlicker
         int points = 100;
         int multiplyer = 1;
         int clicksPerSecond = 0;
-        
+
+        bool isPoweredUp = false;
+
+        DateTime poweredTime = new DateTime();
+        int clicksToLower = 0;
+
         List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
+
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -119,45 +126,7 @@ namespace MuskelKlicker
                     clicker.PassiveClick += sItem.UpgradeP * sItem.Amount;
                 }
 
-                ////Übernimmt Hantel
-                //ShopItem item = (ShopItem)lstbx_shopitems.Items[0];
-                //for (int i = 0; i < countList[1]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Goldene Hanteln
-                //item = (ShopItem)lstbx_shopitems.Items[1];
-                //for (int i = 0; i < countList[2]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Protein
-                //item = (ShopItem)lstbx_shopitems.Items[2];
-                //for (int i = 0; i < countList[3]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
-
-                ////Übernimmt Schlaf
-                //item = (ShopItem)lstbx_shopitems.Items[3];
-                //for (int i = 0; i < countList[4]; i++)
-                //{
-                //    item.Cost *= 2;
-                //    clicker.ActiveClick += item.UpgradeA;
-                //    clicker.PassiveClick += item.UpgradeP;
-                //}
-                //lbl_Points.Content = points.ToString();
+                
 
                 //zeigt alles nochmal richtig an
                 lstbx_shopitems.Items.Refresh();
@@ -177,12 +146,13 @@ namespace MuskelKlicker
                 points += clicker.PassiveClick;
                 lbl_Points.Content = points.ToString();
 
+                //Klicks pro Sekunde sind zu beginn auf 0 gesetzt. Kann mit Upgrades erhöht werden.
                 clicksPerSecond = 0;
                 lbl_Clicks.Content = clicksPerSecond.ToString();
 
 
                 // Lässt den PowerUp-Button mit einer 1%-Wahrscheinlichkeit spawnen
-                if (rnd.Next(0, 100) == 1)
+                if (rnd.Next(0, 2) == 1)
                 {
                     bt_powerUP_spawn();
                 }
@@ -192,7 +162,8 @@ namespace MuskelKlicker
                     //bt_powerUP.Visibility = Visibility.Hidden;
                 }
 
-
+                powerDowneffect();
+                lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
 
             }, this.Dispatcher);
             #endregion
@@ -245,9 +216,11 @@ namespace MuskelKlicker
         }
         #endregion
 
-        #region In Label schreiben | Andrew John Lariat
+        #region Write To Labels
         /// <summary>
-        /// Schreibt die Punkte und die Klicks pro Sekunde in das Label
+        /// Methode die die Punkte ausgibt und die Klick/Sekunde angibt
+        /// 
+        /// ~ Lars Stuhlmacher und Andrew John Lariat
         /// </summary>
         private void WriteToLabel()
         {
@@ -256,12 +229,27 @@ namespace MuskelKlicker
             lbl_Points.Content = points.ToString();
             lbl_Clicks.Content = clicksPerSecond.ToString();
 
-            // Clicks per Second
-            //clicksPerSecond++;
-            //lastClicks.Add(clicksPerSecond);
-            ////ClicksPerSecond();
+
+
+            
+            int temp = clicksPerSecond;
+
+            //Wenn die aktuellen clicks das neue Maximum sind, cpsLabel auf das Maximum setzen
+            if (temp > cpsLabel)
+            {
+                cpsLabel = temp;
+                lastValue = DateTime.Now;
+            }
+            else if (DateTime.Now > lastValue.AddSeconds(1.3))  //Nach 1,3 Sekunden unabhängig vom Maximum, cpsLabel auf die Clicks setzen
+            {                                                       //Wird benötigt um die cps richtig auszugeben
+                cpsLabel = temp;
+                lastValue = DateTime.Now;
+            }
+
+            lbl_Clicks.Content = cpsLabel.ToString();
+
         }
-        #endregion
+#endregion
 
         #region Points bei genügend Klicks | Andrew John Lariat
         /// <summary>
@@ -278,6 +266,11 @@ namespace MuskelKlicker
         #endregion
 
         #region Speicherung des Profils | Daniel Sippel
+        /// <summary>
+        /// Daten von den Items in die Liste hinzufügen und dann Speichern
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {   
             SpielstandDTB spielstand = new SpielstandDTB();
@@ -377,6 +370,9 @@ namespace MuskelKlicker
         #endregion
 
         #region Power Up | Dennis Martens
+        /// <summary>
+        /// Steuert das erscheinen des PowerUp Buttons
+        /// </summary>
         private void bt_powerUP_spawn()
         {
             int duration = 5;
@@ -409,15 +405,21 @@ namespace MuskelKlicker
             bt_powerUP.Margin = new Thickness(rndWidth, rndHeight, 0, 0);
         }
 
+        /// <summary>
+        /// Nach dem Klicken des PowerUp Buttons werden die aktiven Klicks für 30 Sekunden verzehnfacht 
+        /// 
+        /// ~ Dennis Martens und Lars Stuhlmacher
+        /// </summary>
         private void bt_powerUP_Click(object sender, RoutedEventArgs e)
         {
+            isPoweredUp = true;
             powerUPeffect(10);
-            int duration = 30;
-            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, duration), DispatcherPriority.Normal, delegate
+
+            if (isPoweredUp)
             {
-                duration = 30;
-                clicker.ActiveClick /= 10;
-            }, this.Dispatcher);
+                poweredTime = DateTime.Now;
+            }
+            
 
             bt_powerUP.IsEnabled = false;
             bt_powerUP.Visibility = Visibility.Hidden;
@@ -427,9 +429,34 @@ namespace MuskelKlicker
 
         }
 
+        /// <summary>
+        /// Setzt die Werte des Powerups nach 10 Sekunden zurück.
+        /// 
+        /// ~Lars Stuhlmacher
+        /// </summary>
+        private void powerDowneffect()
+        {
+            if (isPoweredUp)
+            {
+                if (DateTime.Now >= poweredTime + new TimeSpan(0,0,10))
+                {
+                    MessageBox.Show("ist hier rein gegangen");
+                    clicker.ActiveClick -= clicksToLower;
+                    isPoweredUp = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Verzehnfacht die aktiven Klicks
+        /// 
+        /// ~Dennis Martens und Lars Stuhlmacher
+        /// </summary>
         private void powerUPeffect(int multiplier)
         {
+            int temp = clicker.ActiveClick;
             clicker.ActiveClick *= multiplier;
+            clicksToLower = clicker.ActiveClick - temp;
         }
         #endregion
 

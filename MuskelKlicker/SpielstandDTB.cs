@@ -15,6 +15,10 @@ namespace MuskelKlicker
         private OleDbConnection verbindung;
         private int itemAddAmount = 0;
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Erstellt eine neue SpielstandDTB mit festen werten der Datenbank
+        /// </summary>
         public SpielstandDTB()
         {
             verbindung = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;" +
@@ -22,6 +26,12 @@ namespace MuskelKlicker
             verbindung.Open();
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Liest alle Daten aus dem Spielstand und fügt sie dann der Spielerdaten liste hinzu
+        /// </summary>
+        /// <param name="user">User ist der name des Profils</param>
+        /// <returns>Liste von den Spielerdaten die aus ints bestehen</returns>
         public List<int> GetSpielstand(string user)
         {
             string sql = string.Format("select * from Spielstand WHERE Spielername = '{0}'",user);
@@ -47,6 +57,11 @@ namespace MuskelKlicker
                 
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Liest die Shopitems aus der Itemdatenbank und erstellt neue items die er dann in die Liste packt
+        /// </summary>
+        /// <returns>Return alle items aus der Datenbank</returns>
         public List<ShopItem> GetShopItems()
         {
             List<ShopItem> itemListe = new List<ShopItem>();
@@ -62,6 +77,11 @@ namespace MuskelKlicker
             return itemListe;
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Liest nur die Namen aus dem Spielstand und fügt sie der Liste hinzu
+        /// </summary>
+        /// <returns>returnt alle Spielernamen</returns>
         public List<string> GetUsers()
         {
             List<string> spielerListe = new List<string>();
@@ -77,19 +97,21 @@ namespace MuskelKlicker
             return spielerListe;
         }
 
-        //public void SaveSpielstand(int scoreAnzahl, int hantelAnzahl, int goldeneHantelnAnzahl, int proteinAnzahl, int schlafAnzahl, string user)
+        /// <summary>
+        /// Daniel Sippel
+        /// Guckt ob der Spielstand existiert wenn ja dann updatet er die Stände wenn nein dann erstellt er einen Neuen Spielstand
+        /// </summary>
+        /// <param name="scoreAnzahl">Die Punkte die man im Moment hat</param>
+        /// <param name="anzahlenItems">Die Anzahl der gekauften Items</param>
+        /// <param name="user">Name des Profils</param>
         public void SaveSpielstand(int scoreAnzahl, List<int> anzahlenItems, string user)
         {
             List<ShopItem> shopItems = new List<ShopItem>();
             shopItems = GetShopItems();
-            
-
-            OleDbCommand kommando = new OleDbCommand("SELECT id FROM Spielstand Where Spielername = '"+ user +"'", verbindung);
-            OleDbDataReader reader = kommando.ExecuteReader();
 
             string cmd;
 
-            if (!reader.HasRows)
+            if (!UserExists(user))
             {
                 cmd = "INSERT INTO Spielstand ( Score,";
 
@@ -108,16 +130,9 @@ namespace MuskelKlicker
                        
                 }
                 cmd += "'" + user + "')";
-
-                //kommando = new OleDbCommand($"INSERT INTO Spielstand (Score, Hanteln, GoldeneHanteln, Protein, Schlafen, Spielername) " +
-                //                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}', '{user}')",
-                //                                         verbindung);
             }
             else
             {
-                //kommando = new OleDbCommand($"UPDATE Spielstand Set Score = '{scoreAnzahl}', Hanteln ={hantelAnzahl}, GoldeneHanteln ={goldeneHantelnAnzahl}, Protein={proteinAnzahl}, Schlafen={schlafAnzahl} Where Spielername = '" + user + "'",
-                //                                                     verbindung);
-
                 cmd = "UPDATE Spielstand Set Score = "+ scoreAnzahl +",";
 
                 for (int i = 0; i < shopItems.Count; i++)
@@ -132,23 +147,29 @@ namespace MuskelKlicker
                     }
                 }
             }
-            kommando = new OleDbCommand(cmd,verbindung);
+            OleDbCommand kommando = new OleDbCommand(cmd,verbindung);
             kommando.ExecuteNonQuery();
             verbindung.Close();
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Löscht den Spielstand des Profils
+        /// </summary>
+        /// <param name="user">Name des Profils</param>
         public void DeleteSpielstand(string user)
         {
-
-            //OleDbCommand kommando = new OleDbCommand($"INSERT INTO Spielstand (Score, Hanteln, GoldeneHanteln, Protein, Schlafen) " +
-            //                                         $"VALUES ('{scoreAnzahl}', '{hantelAnzahl}', '{goldeneHantelnAnzahl}', '{proteinAnzahl}', '{schlafAnzahl}')",
-            //                                         verbindung);
-
             OleDbCommand kommando = new OleDbCommand("DELETE from Spielstand WHERE Spielername = '"+ user +"'",
                                                      verbindung);
             kommando.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Uberprüft ob das Profil existiert
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>True wenn das Profil schon vorhanden ist</returns>
         public Boolean UserExists(string user)
         {
             OleDbCommand kommando = new OleDbCommand("SELECT id FROM Spielstand Where Spielername = '" + user + "'", verbindung);
@@ -162,6 +183,16 @@ namespace MuskelKlicker
             return true;
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Fügt das Item der itemdatenbank hinzu und added dann eine Spalte mit dem itemname der Spielstand Datenbank hinzu
+        /// </summary>
+        /// <param name="cost">Die Kosten des Items</param>
+        /// <param name="name">Der Name des Items</param>
+        /// <param name="description">Die Beschreibung des Items</param>
+        /// <param name="passive">Die passiven Punkte durch das Kaufen des Items</param>
+        /// <param name="active">Die aktiven Punkte durch das Kaufen des Items</param>
+        /// <returns></returns>
         public Boolean AddItem(int cost, string name, string description, int passive, int active)
         {
             OleDbCommand kommando = new OleDbCommand("SELECT id FROM Itemdatenbank Where itemname = '" + name + "'", verbindung);
@@ -189,6 +220,11 @@ namespace MuskelKlicker
             return true;
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Entfernt das Item aus der itemdatenbank und entfern die extra Spalte aus dem Spielstand
+        /// </summary>
+        /// <param name="name">der Name des Items das Gelöscht werden soll</param>
         public void DeleteItem(string name)
         {
             OleDbCommand kommando = new OleDbCommand("DELETE from itemdatenbank WHERE itemname = '" + name + "'",

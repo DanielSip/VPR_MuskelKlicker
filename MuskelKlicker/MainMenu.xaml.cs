@@ -23,6 +23,7 @@ namespace MuskelKlicker
         string user = "";
         List<string> spieler = new List<string>();
         int pos = -1;
+
         public MainMenu()
         {
             InitializeComponent();
@@ -35,6 +36,12 @@ namespace MuskelKlicker
             Close();
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Öffnet den Alten Spielstand und gibt ihn das Profil mit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_oldGame_Click(object sender, RoutedEventArgs e)
         {
             if (user != "")
@@ -46,6 +53,12 @@ namespace MuskelKlicker
             
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Öffnet den Alten Spielstand und gibt ihn das Profil mit das in der Textbox ist
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_newGame_Click(object sender, RoutedEventArgs e)
         {
             SpielstandDTB spielstand = new SpielstandDTB();
@@ -54,23 +67,34 @@ namespace MuskelKlicker
 
             if (txt_newName.Text != "")
             {
-                
-                
-                if (!spielstand.UserExists(txt_newName.Text))
+                if (txt_newName.Text.Length <= 30)
                 {
-                    user = txt_newName.Text;
-                    MainWindow game = new MainWindow(user);
-                    Close();
-                    game.Show();
+                    if (!spielstand.UserExists(txt_newName.Text))
+                    {
+                        user = txt_newName.Text;
+                        MainWindow game = new MainWindow(user);
+                        Close();
+                        game.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Benutzer gibt es Bereits");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Benutzer gibt es Bereits");
+                    MessageBox.Show("Nicht mehr als 30 Zeichen");
                 }
-            }          
+            }
                        
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Nimmt den nächsten Spieler in der Liste wenn er auf max ist wir des wieder auf 0 gesetzt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_ChangeUser_Click(object sender, RoutedEventArgs e)
         {
             if (spieler.Count > pos + 1)
@@ -94,6 +118,12 @@ namespace MuskelKlicker
             }
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// Nimmt alle Users und fügt sie einer Liste hinzu dabei versteckt er den oberen Label und die Textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainMenu1_Loaded(object sender, RoutedEventArgs e)
         {
             SpielstandDTB spielstand = new SpielstandDTB();
@@ -112,6 +142,13 @@ namespace MuskelKlicker
             
         }
 
+
+        /// <summary>
+        /// Daniel Sippel
+        /// Löscht den User der gerade aktiv in der Liste ist
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_DeleteSave_Click(object sender, RoutedEventArgs e)
         {
             SpielstandDTB spielstand = new SpielstandDTB();
@@ -128,6 +165,12 @@ namespace MuskelKlicker
 
         }
 
+        /// <summary>
+        /// Daniel Sippel
+        /// öffnet das Credits Fenster
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_Credits_Click(object sender, RoutedEventArgs e)
         {
             Credits credits = new Credits();
