@@ -247,6 +247,12 @@ namespace MuskelKlicker
             GetBonusPoints(20);
         }
 
+
+        /// <summary>
+        /// Methode die die Punkte ausgibt und die Klick/Sekunde angibt
+        /// 
+        /// ~ Lars Stuhlmacher
+        /// </summary>
         private void WriteToLabel()
         {
             //Button Aktive Click
