@@ -40,8 +40,10 @@ namespace MuskelKlicker
         int points = 100;
         int multiplyer = 1;
         int clicksPerSecond = 0;
-        
-        List<int> lastClicks = new List<int>(); // Liste mit den 10 letzten werten der cps
+        int cpsLabel = 0;
+        DateTime lastValue;
+
+
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -140,6 +142,7 @@ namespace MuskelKlicker
                 points += clicker.PassiveClick;
                 lbl_Points.Content = points.ToString();
 
+                //Klicks pro Sekunde sind zu beginn auf 0 gesetzt. Kann mit Upgrades erhöht werden.
                 clicksPerSecond = 0;
                 lbl_Clicks.Content = clicksPerSecond.ToString();
 
@@ -208,9 +211,11 @@ namespace MuskelKlicker
         }
         #endregion
 
-        #region In Label schreiben | Andrew John Lariat
+        #region Write To Labels
         /// <summary>
-        /// Schreibt die Punkte und die Klicks pro Sekunde in das Label
+        /// Methode die die Punkte ausgibt und die Klick/Sekunde angibt
+        /// 
+        /// ~ Lars Stuhlmacher und Andrew John Lariat
         /// </summary>
         private void WriteToLabel()
         {
@@ -219,12 +224,27 @@ namespace MuskelKlicker
             lbl_Points.Content = points.ToString();
             lbl_Clicks.Content = clicksPerSecond.ToString();
 
-            // Clicks per Second
-            //clicksPerSecond++;
-            //lastClicks.Add(clicksPerSecond);
-            ////ClicksPerSecond();
+
+
+            
+            int temp = clicksPerSecond;
+
+            //Wenn die aktuellen clicks das neue Maximum sind, cpsLabel auf das Maximum setzen
+            if (temp > cpsLabel)
+            {
+                cpsLabel = temp;
+                lastValue = DateTime.Now;
+            }
+            else if (DateTime.Now > lastValue.AddSeconds(1.3))  //Nach 1,3 Sekunden unabhängig vom Maximum, cpsLabel auf die Clicks setzen
+            {                                                       //Wird benötigt um die cps richtig auszugeben
+                cpsLabel = temp;
+                lastValue = DateTime.Now;
+            }
+
+            lbl_Clicks.Content = cpsLabel.ToString();
+
         }
-        #endregion
+#endregion
 
         #region Points bei genügend Klicks | Andrew John Lariat
         /// <summary>
@@ -345,6 +365,9 @@ namespace MuskelKlicker
         #endregion
 
         #region Power Up | Dennis Martens
+        /// <summary>
+        /// Steuert das erscheinen des PowerUp Buttons
+        /// </summary>
         private void bt_powerUP_spawn()
         {
             int duration = 5;
@@ -377,6 +400,9 @@ namespace MuskelKlicker
             bt_powerUP.Margin = new Thickness(rndWidth, rndHeight, 0, 0);
         }
 
+        /// <summary>
+        /// Nach dem Klicken des PowerUp Buttons werden die aktiven Klicks für 30 Sekunden verzehnfacht 
+        /// </summary>
         private void bt_powerUP_Click(object sender, RoutedEventArgs e)
         {
             powerUPeffect(10);
@@ -394,7 +420,9 @@ namespace MuskelKlicker
             lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
 
         }
-
+        /// <summary>
+        /// Verzehnfacht die aktiven Klicks
+        /// </summary>
         private void powerUPeffect(int multiplier)
         {
             clicker.ActiveClick *= multiplier;
