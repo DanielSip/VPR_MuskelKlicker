@@ -251,7 +251,7 @@ namespace MuskelKlicker
         /// <summary>
         /// Methode die die Punkte ausgibt und die Klick/Sekunde angibt
         /// 
-        /// ~ Lars Stuhlmacher
+        /// ~ Lars Stuhlmacher und Andrew John Lariat
         /// </summary>
         private void WriteToLabel()
         {
