@@ -283,8 +283,8 @@ namespace MuskelKlicker
 
 
             spielstand.SaveSpielstand(points, countList, user);
-            
-            Close();
+
+            Application.Current.Shutdown();
         }
         #endregion
 
