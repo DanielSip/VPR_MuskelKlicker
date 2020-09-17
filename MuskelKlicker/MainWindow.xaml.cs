@@ -40,9 +40,14 @@ namespace MuskelKlicker
         int points = 100;
         int multiplyer = 1;
         int clicksPerSecond = 0;
+
+        bool isPoweredUp = false;
+
+        DateTime poweredTime = new DateTime();
+        int clicksToLower = 0;
+
         int cpsLabel = 0;
         DateTime lastValue;
-
 
 
 
@@ -158,7 +163,8 @@ namespace MuskelKlicker
                     //bt_powerUP.Visibility = Visibility.Hidden;
                 }
 
-
+                powerDowneffect();
+                lab_ActiveClick.Content = string.Format("Aktiver Klick: " + clicker.ActiveClick);
 
             }, this.Dispatcher);
             #endregion
@@ -402,16 +408,19 @@ namespace MuskelKlicker
 
         /// <summary>
         /// Nach dem Klicken des PowerUp Buttons werden die aktiven Klicks für 30 Sekunden verzehnfacht 
+        /// 
+        /// ~ Dennis Martens und Lars Stuhlmacher
         /// </summary>
         private void bt_powerUP_Click(object sender, RoutedEventArgs e)
         {
+            isPoweredUp = true;
             powerUPeffect(10);
-            int duration = 30;
-            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, duration), DispatcherPriority.Normal, delegate
+
+            if (isPoweredUp)
             {
-                duration = 30;
-                clicker.ActiveClick /= 10;
-            }, this.Dispatcher);
+                poweredTime = DateTime.Now;
+            }
+            
 
             bt_powerUP.IsEnabled = false;
             bt_powerUP.Visibility = Visibility.Hidden;
@@ -420,12 +429,35 @@ namespace MuskelKlicker
             lab_PassiveClick.Content = string.Format("Passive Punkte: " + clicker.PassiveClick);
 
         }
+
+        /// <summary>
+        /// Setzt die Werte des Powerups nach 10 Sekunden zurück.
+        /// 
+        /// ~Lars Stuhlmacher
+        /// </summary>
+        private void powerDowneffect()
+        {
+            if (isPoweredUp)
+            {
+                if (DateTime.Now >= poweredTime + new TimeSpan(0,0,10))
+                {
+                    MessageBox.Show("ist hier rein gegangen");
+                    clicker.ActiveClick -= clicksToLower;
+                    isPoweredUp = false;
+                }
+            }
+        }
+
         /// <summary>
         /// Verzehnfacht die aktiven Klicks
+        /// 
+        /// ~Dennis Martens und Lars Stuhlmacher
         /// </summary>
         private void powerUPeffect(int multiplier)
         {
+            int temp = clicker.ActiveClick;
             clicker.ActiveClick *= multiplier;
+            clicksToLower = clicker.ActiveClick - temp;
         }
         #endregion
 
